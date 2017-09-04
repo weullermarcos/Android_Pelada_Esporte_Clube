@@ -1,9 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.weuller.peladaesporteclube.LoginActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:layout_marginTop="20dp"
+        android:src="@mipmap/ic_launcher"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="8"/>
+
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="3">
+
+        <EditText
+            android:id="@+id/edtEmail"
+            android:hint="E-mail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/edtSenha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Senha"
+            android:password="true" />
+
+        <Button
+            android:id="@+id/btnEntrar"
+            android:layout_marginTop="20dp"
+            android:background="#689F38"
+            android:text="Entrar"
+            android:textColor="#FFFFFF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btnCadastrar"
+            android:layout_marginTop="30dp"
+            android:background="#689F38"
+            android:text="Cadastre-se"
+            android:textColor="#FFFFFF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/btnGoogle"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <!--<com.facebook.login.widget.LoginButton-->
+                <!--android:id="@+id/btnFacebook"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1"/>-->
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
