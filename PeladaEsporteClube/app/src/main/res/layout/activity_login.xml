@@ -72,12 +72,12 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"/>
 
-            <!--<com.facebook.login.widget.LoginButton-->
-                <!--android:id="@+id/btnFacebook"-->
-                <!--android:layout_marginLeft="10dp"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_weight="1"/>-->
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/login_btnFacebook"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
 
 
         </LinearLayout>
