@@ -24,13 +24,13 @@
         android:layout_weight="3">
 
         <EditText
-            android:id="@+id/edtEmail"
+            android:id="@+id/login_edtEmail"
             android:hint="E-mail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <EditText
-            android:id="@+id/edtSenha"
+            android:id="@+id/login_edtPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -38,7 +38,7 @@
             android:password="true" />
 
         <Button
-            android:id="@+id/btnEntrar"
+            android:id="@+id/login_btnSigin"
             android:layout_marginTop="20dp"
             android:background="#689F38"
             android:text="Entrar"
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content" />
 
         <Button
-            android:id="@+id/btnCadastrar"
+            android:id="@+id/login_btnRegister"
             android:layout_marginTop="30dp"
             android:background="#689F38"
             android:text="Cadastre-se"
@@ -64,7 +64,7 @@
             android:orientation="horizontal">
 
             <com.google.android.gms.common.SignInButton
-                android:id="@+id/btnGoogle"
+                android:id="@+id/login_btnGoogle"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginRight="10dp"

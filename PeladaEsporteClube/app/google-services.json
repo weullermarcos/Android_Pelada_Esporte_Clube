@@ -8,20 +8,12 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:536363856517:android:13f3206d17536649",
+        "mobilesdk_app_id": "1:536363856517:android:95bee272f4db4f35",
         "android_client_info": {
-          "package_name": "com.weullermarcos.peladaesporteclube"
+          "package_name": "com.example.weuller.peladaesporteclube"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "536363856517-ud0f9nr1h61917pv6r035a5f1g37ds8m.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.weullermarcos.peladaesporteclube",
-            "certificate_hash": "4b2fe5cf4a2f832ae2aaa32b8ba1d46e7831cec1"
-          }
-        },
         {
           "client_id": "536363856517-d8c4830k8nj7o2bdgem9r4q59tqvvoo9.apps.googleusercontent.com",
           "client_type": 3
@@ -37,13 +29,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "536363856517-d8c4830k8nj7o2bdgem9r4q59tqvvoo9.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2
