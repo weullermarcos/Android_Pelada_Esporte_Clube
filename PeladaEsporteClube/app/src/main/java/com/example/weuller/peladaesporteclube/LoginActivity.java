@@ -57,6 +57,12 @@ public class LoginActivity extends AppCompatActivity implements  GoogleApiClient
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        //verifica se o usuárioe está logado
+        if(FirebaseAuth.getInstance().getCurrentUser() != null){
+            goToMain();
+            return;
+        }
+
         edtEmail = (EditText) findViewById(R.id.login_edtEmail);
         edtPassword = (EditText) findViewById(R.id.login_edtPassword);
         btnSigin = (Button) findViewById(R.id.login_btnSigin);
