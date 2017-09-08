@@ -4,7 +4,7 @@ package com.example.weuller.peladaesporteclube.Models;
  * Created by weullermarcos on 08/09/17.
  */
 
-public class Message {
+public class ChatMessage {
 
     private String date;
     private String message;
@@ -33,5 +33,11 @@ public class Message {
 
     public void setUser(String user) {
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+
+        return user + " - " + message;
     }
 }
