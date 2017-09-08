@@ -87,15 +87,16 @@ public class LoginActivity extends AppCompatActivity implements  GoogleApiClient
             @Override
             public void onCancel() {
 
+                dialog.hideProgressDialog();
                 Log.d("LOG", "facebook:onCancel");
-                //updateUI(null);
             }
 
             @Override
             public void onError(FacebookException error) {
 
+                dialog.hideProgressDialog();
                 Log.d("LOG", "facebook:onError", error);
-                //updateUI(null);
+                Toast.makeText(LoginActivity.this, "Erro ao fazer login com Facebook. Verifique sua conexão com a internet", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -202,7 +203,7 @@ public class LoginActivity extends AppCompatActivity implements  GoogleApiClient
 
                 dialog.hideProgressDialog();
                 Log.d("LOG", result.toString());
-                Toast.makeText(LoginActivity.this, "Deu Erro..", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Erro ao fazer login com Gmail.", Toast.LENGTH_SHORT).show();
             }
         }
         else{
@@ -230,7 +231,7 @@ public class LoginActivity extends AppCompatActivity implements  GoogleApiClient
 
                             dialog.hideProgressDialog();
                             Log.w("LOG", "signInWithCredential", task.getException());
-                            Toast.makeText(LoginActivity.this, "Erro ao autenticar.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Erro ao fazer login com Gmail. Verifique sua conexão com a internet", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -265,11 +266,9 @@ public class LoginActivity extends AppCompatActivity implements  GoogleApiClient
 
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
-
-                            Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                            dialog.hideProgressDialog();
+                            Toast.makeText(LoginActivity.this, "Erro ao fazer login com Facebook.", Toast.LENGTH_SHORT).show();
                         }
-
-                        //hideProgressDialog();
                     }
                 });
     }

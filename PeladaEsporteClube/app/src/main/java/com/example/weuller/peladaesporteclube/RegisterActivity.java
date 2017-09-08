@@ -92,7 +92,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                                     // If sign in fails, display a message to the user.
                                     Log.w("LOG", "createUserWithEmail:failure", task.getException());
-                                    Toast.makeText(RegisterActivity.this, "Erro ao criar usuário.",
+                                    Toast.makeText(RegisterActivity.this, "Erro ao criar usuário. Verifique sua conexão com a internet.",
                                             Toast.LENGTH_SHORT).show();
                                 }
 
