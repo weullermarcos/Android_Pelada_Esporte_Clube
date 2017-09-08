@@ -186,6 +186,8 @@ public class LoginActivity extends AppCompatActivity implements  GoogleApiClient
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        dialog.showProgressDialog("Efetuando Login", "Aguarde", LoginActivity.this);
+
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
 
@@ -198,6 +200,7 @@ public class LoginActivity extends AppCompatActivity implements  GoogleApiClient
 
             } else {
 
+                dialog.hideProgressDialog();
                 Log.d("LOG", result.toString());
                 Toast.makeText(LoginActivity.this, "Deu Erro..", Toast.LENGTH_SHORT).show();
             }
@@ -225,6 +228,7 @@ public class LoginActivity extends AppCompatActivity implements  GoogleApiClient
                         }
                         else {
 
+                            dialog.hideProgressDialog();
                             Log.w("LOG", "signInWithCredential", task.getException());
                             Toast.makeText(LoginActivity.this, "Erro ao autenticar.", Toast.LENGTH_SHORT).show();
                         }
@@ -235,6 +239,7 @@ public class LoginActivity extends AppCompatActivity implements  GoogleApiClient
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+        dialog.hideProgressDialog();
         Log.d("LOG", "onConnectionFailed:" + connectionResult);
         Toast.makeText(this, "Erro no Google Play Services.", Toast.LENGTH_SHORT).show();
     }
