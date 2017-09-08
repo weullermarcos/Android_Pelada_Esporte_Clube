@@ -38,6 +38,6 @@ public class ChatMessage {
     @Override
     public String toString() {
 
-        return user + " - " + message;
+        return user + "\n" + message;
     }
 }

@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.weuller.peladaesporteclube.Models.ChatMessage;
+import com.example.weuller.peladaesporteclube.Services.DialogService;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,6 +30,8 @@ public class ChatActivity extends AppCompatActivity {
     private ArrayAdapter<ChatMessage> adpMessages;
 
     private List<ChatMessage> messageList = new ArrayList<>();
+    private DialogService dialog = new DialogService();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,8 @@ public class ChatActivity extends AppCompatActivity {
         adpMessages = new ArrayAdapter<ChatMessage>(this, android.R.layout.simple_list_item_1);
         lstMessages.setAdapter(adpMessages);
 
+        dialog.showProgressDialog("Carregando mensagens...", "Aguarde", ChatActivity.this);
+
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -53,8 +59,6 @@ public class ChatActivity extends AppCompatActivity {
 
                     for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                         ChatMessage message = postSnapshot.getValue(ChatMessage.class);
-
-                        Log.i("LOG","Usuario = " + message.getUser());
 
                         messageList.add(message);
                     }
@@ -69,9 +73,12 @@ public class ChatActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError error) {
 
                 Log.w("LOG", "Failed to read value.", error.toException());
+
+                dialog.hideProgressDialog();
+                Toast.makeText(ChatActivity.this, "Erro ao carregar mensagens. verifique a sua conexão com a internet.", Toast.LENGTH_SHORT).show();
+
             }
         });
-
     }
 
     private void populateList(){
@@ -81,7 +88,8 @@ public class ChatActivity extends AppCompatActivity {
         for (ChatMessage localMessage: messageList) {
 
             adpMessages.add(localMessage);
-
         }
+
+        dialog.hideProgressDialog();
     }
 }
