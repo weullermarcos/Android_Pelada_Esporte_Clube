@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
 
             String user = mAuth.getCurrentUser().getDisplayName();
 
+            //mAuth.getCurrentUser().getPhotoUrl();
+
             if(user != null && user.isEmpty())
                 user = mAuth.getCurrentUser().getEmail();
 
