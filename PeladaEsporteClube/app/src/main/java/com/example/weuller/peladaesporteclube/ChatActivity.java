@@ -4,7 +4,9 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -25,7 +27,7 @@ public class ChatActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseDatabase database;
     private DatabaseReference myRef;
-
+    Button btnSend;
     private ListView lstMessages;
     private ArrayAdapter<ChatMessage> adpMessages;
 
@@ -39,6 +41,7 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
 
         lstMessages = (ListView) findViewById(R.id.chat_lstMessages);
+        btnSend = (Button) findViewById(R.id.chat_btnSend);
 
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("messages");
@@ -76,6 +79,21 @@ public class ChatActivity extends AppCompatActivity {
 
                 dialog.hideProgressDialog();
                 Toast.makeText(ChatActivity.this, "Erro ao carregar mensagens. verifique a sua conexão com a internet.", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        btnSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                ChatMessage chatMessage = new ChatMessage();
+                chatMessage.setUser("Waldiney");
+                chatMessage.setMessage("Bora bora galera.. jogar futebol");
+                chatMessage.setDate("08/09/2017 - 20:50");
+
+                DatabaseReference newPostRef = myRef.push();
+                newPostRef.setValue(chatMessage);
 
             }
         });
