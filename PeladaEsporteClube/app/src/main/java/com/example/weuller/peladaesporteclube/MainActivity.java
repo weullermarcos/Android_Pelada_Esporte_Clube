@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
-    private Button btnExit;
+    private Button btnExit, btnMap, btnChat;
     private TextView txtUser;
 
     @Override
@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btnExit = (Button) findViewById(R.id.main_btnExit);
+        btnMap = (Button) findViewById(R.id.main_btnMap);
+        btnChat = (Button) findViewById(R.id.main_btnChat);
         txtUser = (TextView) findViewById(R.id.main_txtUser);
 
         mAuth = FirebaseAuth.getInstance();
@@ -37,6 +39,26 @@ public class MainActivity extends AppCompatActivity {
 
             txtUser.setText(user);
         }
+
+        btnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+
+            }
+        });
+
+        btnChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MainActivity.this, ChatActivity.class);
+                startActivity(intent);
+                finish();
+
+            }
+        });
 
         btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
