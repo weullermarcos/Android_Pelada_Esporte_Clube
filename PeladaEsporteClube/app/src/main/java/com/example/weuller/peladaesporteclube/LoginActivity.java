@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.weuller.peladaesporteclube.Services.DialogService;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -51,6 +52,8 @@ public class LoginActivity extends AppCompatActivity implements  GoogleApiClient
     private CallbackManager mCallbackManager;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
+    private DialogService dialog = new DialogService();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +121,8 @@ public class LoginActivity extends AppCompatActivity implements  GoogleApiClient
                     return;
                 }
 
+                dialog.showProgressDialog("Efetuando Login", "Aguarde", LoginActivity.this);
+
                 //FUNCIONANDO
                 mAuth.signInWithEmailAndPassword(edtEmail.getText().toString(), edtPassword.getText().toString()).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -125,7 +130,9 @@ public class LoginActivity extends AppCompatActivity implements  GoogleApiClient
 
                         if(! task.isSuccessful()){
 
+                            dialog.hideProgressDialog();
                             Toast.makeText(LoginActivity.this, "Usuário ou senha inválida", Toast.LENGTH_SHORT).show();
+
                         }else{
 
                             user = task.getResult().getUser();
@@ -268,6 +275,8 @@ public class LoginActivity extends AppCompatActivity implements  GoogleApiClient
     }
 
     private void goToMain(){
+
+        dialog.hideProgressDialog();
 
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
