@@ -20,7 +20,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class ChatActivity extends AppCompatActivity {
@@ -102,10 +105,14 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                Calendar c = Calendar.getInstance();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss");
+                String currentDateTime = sdf.format(c.getTime());
+
                 ChatMessage chatMessage = new ChatMessage();
                 chatMessage.setUser(user);
                 chatMessage.setMessage(edtMessage.getText().toString().trim());
-                chatMessage.setDate("09/09/2017 - 10:20");
+                chatMessage.setDate(currentDateTime);
 
                 DatabaseReference newPostRef = myRef.push();
                 newPostRef.setValue(chatMessage);
