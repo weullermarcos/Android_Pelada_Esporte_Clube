@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -27,9 +28,11 @@ public class ChatActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseDatabase database;
     private DatabaseReference myRef;
-    Button btnSend;
+    private Button btnSend;
+    private EditText edtMessage;
     private ListView lstMessages;
     private ArrayAdapter<ChatMessage> adpMessages;
+    private String user;
 
     private List<ChatMessage> messageList = new ArrayList<>();
     private DialogService dialog = new DialogService();
@@ -41,6 +44,7 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
 
         lstMessages = (ListView) findViewById(R.id.chat_lstMessages);
+        edtMessage = (EditText) findViewById(R.id.chat_edtMessage);
         btnSend = (Button) findViewById(R.id.chat_btnSend);
 
         database = FirebaseDatabase.getInstance();
@@ -49,6 +53,17 @@ public class ChatActivity extends AppCompatActivity {
 
         adpMessages = new ArrayAdapter<ChatMessage>(this, android.R.layout.simple_list_item_1);
         lstMessages.setAdapter(adpMessages);
+
+        if(mAuth.getCurrentUser().getDisplayName() != null) {
+
+            user = mAuth.getCurrentUser().getDisplayName();
+
+            //mAuth.getCurrentUser().getPhotoUrl();
+
+            if(user != null && user.isEmpty())
+                user = mAuth.getCurrentUser().getEmail();
+
+        }
 
         dialog.showProgressDialog("Carregando mensagens...", "Aguarde", ChatActivity.this);
 
@@ -88,12 +103,14 @@ public class ChatActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 ChatMessage chatMessage = new ChatMessage();
-                chatMessage.setUser("Waldiney");
-                chatMessage.setMessage("Bora bora galera.. jogar futebol");
-                chatMessage.setDate("08/09/2017 - 20:50");
+                chatMessage.setUser(user);
+                chatMessage.setMessage(edtMessage.getText().toString().trim());
+                chatMessage.setDate("09/09/2017 - 10:20");
 
                 DatabaseReference newPostRef = myRef.push();
                 newPostRef.setValue(chatMessage);
+
+                edtMessage.setText("");
 
             }
         });
