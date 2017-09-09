@@ -2,4 +2,5 @@
     <string name="app_name">Pelada Esporte Clube</string>
     <string name="facebook_app_id">332091940535685</string>
     <string name="fb_login_protocol_scheme">fb332091940535685</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
