@@ -18,13 +18,18 @@
         android:layout_marginRight="10dp" />
 
     <LinearLayout
+        android:background="#A0D080"
         android:orientation="vertical"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
             android:textSize="20dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:textStyle="bold"
             android:id="@+id/list_item_message_txtUserName"
             android:layout_width="match_parent"
@@ -34,7 +39,10 @@
 
         <TextView
             android:textSize="18dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:textStyle="normal"
             android:id="@+id/list_item_message_txtChatMessage"
             android:layout_width="match_parent"
