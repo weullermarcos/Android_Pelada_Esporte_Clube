@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_margin="10dp"
+    tools:context="com.example.weuller.peladaesporteclube.MessageListItem">
+
+    <ImageView
+        android:id="@+id/list_item_message_imgUserImage"
+        android:layout_width="51dp"
+        android:layout_height="51dp"
+        android:src="@mipmap/defaultuser"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="10dp" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:id="@+id/list_item_message_txtUserName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="User Name"/>
+
+
+        <TextView
+            android:textSize="18dp"
+            android:layout_marginTop="10dp"
+            android:textStyle="normal"
+            android:id="@+id/list_item_message_txtChatMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Message"/>
+
+    </LinearLayout>
+
+</LinearLayout>

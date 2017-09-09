@@ -9,14 +9,21 @@
     tools:context="com.example.weuller.peladaesporteclube.ChatActivity">
 
 
-    <ListView
-        android:id="@+id/chat_lstMessages"
-        android:layout_marginTop="20dp"
+    <!--<ListView-->
+        <!--android:id="@+id/chat_lstMessages"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="8">-->
+
+    <!--</ListView>-->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/chat_rcvMessages"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="8">
-
-    </ListView>
+        android:layout_weight="8"/>
 
     <LinearLayout
         android:orientation="horizontal"

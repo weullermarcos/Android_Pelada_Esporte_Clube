@@ -1,7 +1,7 @@
 package com.example.weuller.peladaesporteclube;
 
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.*;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.weuller.peladaesporteclube.Adapters.ChatMessageRecyclerViewAdapter;
 import com.example.weuller.peladaesporteclube.Models.ChatMessage;
 import com.example.weuller.peladaesporteclube.Services.DialogService;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,7 +24,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class ChatActivity extends AppCompatActivity {
@@ -33,12 +33,16 @@ public class ChatActivity extends AppCompatActivity {
     private DatabaseReference myRef;
     private Button btnSend;
     private EditText edtMessage;
+    private ChatMessageRecyclerViewAdapter adpChatMessage;
     private ListView lstMessages;
     private ArrayAdapter<ChatMessage> adpMessages;
+
     private String user;
 
     private List<ChatMessage> messageList = new ArrayList<>();
     private DialogService dialog = new DialogService();
+
+    private RecyclerView rcvMessages;
 
 
     @Override
@@ -46,16 +50,22 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        lstMessages = (ListView) findViewById(R.id.chat_lstMessages);
+        //lstMessages = (ListView) findViewById(R.id.chat_lstMessages);
         edtMessage = (EditText) findViewById(R.id.chat_edtMessage);
         btnSend = (Button) findViewById(R.id.chat_btnSend);
+        rcvMessages = (RecyclerView) findViewById(R.id.chat_rcvMessages);
 
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("messages");
         mAuth = FirebaseAuth.getInstance();
 
-        adpMessages = new ArrayAdapter<ChatMessage>(this, android.R.layout.simple_list_item_1);
-        lstMessages.setAdapter(adpMessages);
+        adpChatMessage = new ChatMessageRecyclerViewAdapter(this, messageList);
+        rcvMessages.setAdapter(adpChatMessage);
+        rcvMessages.setItemAnimator(new DefaultItemAnimator());
+        rcvMessages.setLayoutManager(new LinearLayoutManager(this));
+
+        //adpMessages = new ArrayAdapter<ChatMessage>(this, android.R.layout.simple_list_item_1);
+        //lstMessages.setAdapter(adpMessages);
 
         if(mAuth.getCurrentUser().getDisplayName() != null) {
 
@@ -84,6 +94,8 @@ public class ChatActivity extends AppCompatActivity {
                         messageList.add(message);
                     }
 
+                    dialog.hideProgressDialog();
+                    adpChatMessage.notifyDataSetChanged();
                     populateList();
                 }
 
@@ -101,6 +113,7 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
+        //Enviar mensagens
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -118,19 +131,18 @@ public class ChatActivity extends AppCompatActivity {
                 newPostRef.setValue(chatMessage);
 
                 edtMessage.setText("");
-
             }
         });
     }
 
     private void populateList(){
 
-        adpMessages.clear();
-
-        for (ChatMessage localMessage: messageList) {
-
-            adpMessages.add(localMessage);
-        }
+//        adpChatMessage.clear();
+//
+//        for (ChatMessage localMessage: messageList) {
+//
+//            adpChatMessage.add(localMessage);
+//        }
 
         dialog.hideProgressDialog();
     }
