@@ -15,6 +15,7 @@ public class ChatMessageViewHolder extends RecyclerView.ViewHolder {
 
     public TextView txtUserName;
     public TextView txtChatMessage;
+    public TextView txtMessageDate;
     public ImageView imgUserImage;
     public ChatMessage chatMessage;
 
@@ -23,6 +24,7 @@ public class ChatMessageViewHolder extends RecyclerView.ViewHolder {
 
         txtUserName = (TextView) itemView.findViewById(R.id.list_item_message_txtUserName);
         txtChatMessage = (TextView) itemView.findViewById(R.id.list_item_message_txtChatMessage);
+        txtMessageDate = (TextView) itemView.findViewById(R.id.list_item_message_txtMessageDate);
         imgUserImage = (ImageView) itemView.findViewById(R.id.list_item_message_imgUserImage);
 
         RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) itemView.getLayoutParams();

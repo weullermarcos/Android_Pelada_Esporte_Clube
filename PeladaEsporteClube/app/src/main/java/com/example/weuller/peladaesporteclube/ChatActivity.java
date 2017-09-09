@@ -34,8 +34,8 @@ public class ChatActivity extends AppCompatActivity {
     private Button btnSend;
     private EditText edtMessage;
     private ChatMessageRecyclerViewAdapter adpChatMessage;
-    private ListView lstMessages;
-    private ArrayAdapter<ChatMessage> adpMessages;
+    //private ListView lstMessages;
+    //private ArrayAdapter<ChatMessage> adpMessages;
 
     private String user;
 
@@ -119,7 +119,7 @@ public class ChatActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Calendar c = Calendar.getInstance();
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss");
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy - HH:mm");
                 String currentDateTime = sdf.format(c.getTime());
 
                 ChatMessage chatMessage = new ChatMessage();

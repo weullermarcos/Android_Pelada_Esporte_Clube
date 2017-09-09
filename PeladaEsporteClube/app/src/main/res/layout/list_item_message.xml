@@ -32,10 +32,9 @@
             android:layout_marginBottom="10dp"
             android:textStyle="bold"
             android:id="@+id/list_item_message_txtUserName"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="User Name"/>
-
 
         <TextView
             android:textSize="18dp"
@@ -48,6 +47,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Message"/>
+
+        <TextView
+            android:textSize="10dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textStyle="italic"
+            android:id="@+id/list_item_message_txtMessageDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="xx/xx/xxxx - xx:xx"/>
 
     </LinearLayout>
 

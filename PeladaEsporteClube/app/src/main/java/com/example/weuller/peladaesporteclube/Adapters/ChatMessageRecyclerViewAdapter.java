@@ -43,6 +43,8 @@ public class ChatMessageRecyclerViewAdapter extends RecyclerView.Adapter<ChatMes
 
         holder.txtUserName.setText(chatMessage.getUser());
         holder.txtChatMessage.setText(chatMessage.getMessage());
+        holder.txtMessageDate.setText(chatMessage.getDate());
+
     }
 
     @Override
