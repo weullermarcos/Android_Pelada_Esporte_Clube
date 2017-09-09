@@ -5,10 +5,8 @@ import android.support.v7.widget.*;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.weuller.peladaesporteclube.Adapters.ChatMessageRecyclerViewAdapter;
@@ -34,8 +32,6 @@ public class ChatActivity extends AppCompatActivity {
     private Button btnSend;
     private EditText edtMessage;
     private ChatMessageRecyclerViewAdapter adpChatMessage;
-    //private ListView lstMessages;
-    //private ArrayAdapter<ChatMessage> adpMessages;
 
     private String user;
 
@@ -50,7 +46,6 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        //lstMessages = (ListView) findViewById(R.id.chat_lstMessages);
         edtMessage = (EditText) findViewById(R.id.chat_edtMessage);
         btnSend = (Button) findViewById(R.id.chat_btnSend);
         rcvMessages = (RecyclerView) findViewById(R.id.chat_rcvMessages);
@@ -64,8 +59,6 @@ public class ChatActivity extends AppCompatActivity {
         rcvMessages.setItemAnimator(new DefaultItemAnimator());
         rcvMessages.setLayoutManager(new LinearLayoutManager(this));
 
-        //adpMessages = new ArrayAdapter<ChatMessage>(this, android.R.layout.simple_list_item_1);
-        //lstMessages.setAdapter(adpMessages);
 
         if(mAuth.getCurrentUser().getDisplayName() != null) {
 
@@ -96,7 +89,8 @@ public class ChatActivity extends AppCompatActivity {
 
                     dialog.hideProgressDialog();
                     adpChatMessage.notifyDataSetChanged();
-                    populateList();
+
+                    rcvMessages.scrollToPosition(messageList.size() - 1);
                 }
 
                 catch (Exception e){}
@@ -133,17 +127,5 @@ public class ChatActivity extends AppCompatActivity {
                 edtMessage.setText("");
             }
         });
-    }
-
-    private void populateList(){
-
-//        adpChatMessage.clear();
-//
-//        for (ChatMessage localMessage: messageList) {
-//
-//            adpChatMessage.add(localMessage);
-//        }
-
-        dialog.hideProgressDialog();
     }
 }
