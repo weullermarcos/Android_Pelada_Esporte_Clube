@@ -55,8 +55,6 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(MainActivity.this, ChatActivity.class);
                 startActivity(intent);
-                finish();
-
             }
         });
 
@@ -70,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent(MainActivity.this, LoginActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
+                finish();
             }
         });
     }
