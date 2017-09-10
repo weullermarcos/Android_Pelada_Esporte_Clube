@@ -28,7 +28,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -45,6 +47,9 @@ public class MainActivity extends AppCompatActivity {
 
     private DialogService dialog = new DialogService();
     private List<User> userList = new ArrayList<>();
+
+    private boolean userExists = false;
+    private boolean userCreatedOrUpdated = false;
 
 
     @Override
@@ -81,7 +86,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                try {
+                if(userCreatedOrUpdated)
+                    return;
+
+                    try {
 
                     userList.clear();
 
@@ -89,9 +97,13 @@ public class MainActivity extends AppCompatActivity {
                         User user = postSnapshot.getValue(User.class);
 
                         userList.add(user);
+
+                        if(user.getUid().equals(mAuth.getCurrentUser().getUid())){
+                            userExists = true;
+                            break;
+                        }
                     }
 
-                    dialog.hideProgressDialog();
                     getCurrentLocation();
                 }
 
@@ -177,8 +189,27 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateOrPushUserData(){
 
+        if(userExists){
+            //TODO: atualizar dados
+        }
+        else{
 
+            //registra dados
 
+            User user = new User();
+            user.setName(mAuth.getCurrentUser().getDisplayName());
+            user.setEmail(mAuth.getCurrentUser().getEmail());
+            user.setUid(mAuth.getCurrentUser().getUid());
+            user.setLatitude(currentLocation.getLatitude());
+            user.setLongitude(currentLocation.getLongitude());
+
+            DatabaseReference newPostRef = myRef.push();
+            newPostRef.setValue(user);
+
+        }
+
+        userCreatedOrUpdated = true;
+        dialog.hideProgressDialog();
     }
 
     private void getCurrentLocation() {
@@ -197,6 +228,8 @@ public class MainActivity extends AppCompatActivity {
                         Log.d("LONGITUDE", String.valueOf(location.getLongitude()));
 
                         currentLocation = location;
+
+                        updateOrPushUserData();
                     }
                 }
             });
