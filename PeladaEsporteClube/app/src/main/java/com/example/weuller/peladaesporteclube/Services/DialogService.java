@@ -1,8 +1,12 @@
 package com.example.weuller.peladaesporteclube.Services;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+
+import com.example.weuller.peladaesporteclube.MainActivity;
 
 /**
  * Created by weullermarcos on 08/09/17.
@@ -11,6 +15,7 @@ import android.content.Context;
 public class DialogService {
 
     private Dialog mDialog;
+    private AlertDialog alert;
 
     public void showProgressDialog(String message, String title, Context context) {
 
@@ -22,6 +27,22 @@ public class DialogService {
 
         if(mDialog != null && mDialog.isShowing())
             mDialog.dismiss();
+    }
+
+    public void showAlertDialog(String message, String title, Context context){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        alert = builder.create();
+        alert.show();
     }
 
 }

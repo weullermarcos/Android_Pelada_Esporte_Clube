@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.weuller.peladaesporteclube.Services.DialogService;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnExit, btnMap, btnChat;
     private TextView txtUser;
 
-    AlertDialog alert;
+    private DialogService dialog = new DialogService();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,19 +112,7 @@ public class MainActivity extends AppCompatActivity {
                 else{
 
                     btnMap.setEnabled(false);
-
-                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                    builder.setTitle("Aviso");
-                    builder.setMessage("Algumas funcionalidades podem não funcionar corretamente, caso a permissão de localização não seja concedida!");
-                    builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-
-                        }
-                    });
-
-                    alert = builder.create();
-                    alert.show();
+                    dialog.showAlertDialog("Algumas funcionalidades podem não funcionar corretamente, caso a permissão de localização não seja concedida!", "Aviso", MainActivity.this);
                 }
                 return;
             }
