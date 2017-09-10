@@ -13,24 +13,39 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.weuller.peladaesporteclube.Models.ChatMessage;
+import com.example.weuller.peladaesporteclube.Models.User;
 import com.example.weuller.peladaesporteclube.Services.DialogService;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final int REQUEST_FINE_LOCATION = 0;
     private FusedLocationProviderClient mFusedLocationClient;
     private FirebaseAuth mAuth;
+    private FirebaseDatabase database;
+    private DatabaseReference myRef;
     private Location currentLocation;
 
     private Button btnExit, btnMap, btnChat;
     private TextView txtUser;
 
     private DialogService dialog = new DialogService();
+    private List<User> userList = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,19 +59,11 @@ public class MainActivity extends AppCompatActivity {
         btnChat = (Button) findViewById(R.id.main_btnChat);
         txtUser = (TextView) findViewById(R.id.main_txtUser);
 
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            //NÀO TEM PERMISSÃO para localização DESABILITA O BOTÃO
-            btnMap.setEnabled(false);
-        }
-        else{
-
-            //TEM PERMISSÃO para localização hABILITA O BOTÃO
-            btnMap.setEnabled(true);
-            getCurrentLocation();
-        }
-
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference("users");
         mAuth = FirebaseAuth.getInstance();
+
+        dialog.showProgressDialog("Carregando suas informações...", "Aguarde", MainActivity.this);
 
         if(mAuth.getCurrentUser().getDisplayName() != null) {
 
@@ -69,6 +76,49 @@ public class MainActivity extends AppCompatActivity {
 
             txtUser.setText(user);
         }
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                try {
+
+                    userList.clear();
+
+                    for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                        User user = postSnapshot.getValue(User.class);
+
+                        userList.add(user);
+                    }
+
+                    dialog.hideProgressDialog();
+                    getCurrentLocation();
+                }
+
+                catch (Exception e){}
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+
+                Log.w("LOG", "Failed to read value.", error.toException());
+
+                dialog.hideProgressDialog();
+                Toast.makeText(MainActivity.this, "Erro ao carregar informações do usuário. verifique a sua conexão com a internet.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            //NÀO TEM PERMISSÃO para localização DESABILITA O BOTÃO
+            btnMap.setEnabled(false);
+        }
+        else{
+
+            //TEM PERMISSÃO para localização hABILITA O BOTÃO
+            btnMap.setEnabled(true);
+        }
+
 
         btnMap.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,7 +164,6 @@ public class MainActivity extends AppCompatActivity {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                     btnMap.setEnabled(true);
-                    getCurrentLocation();
                 }
                 else{
 
@@ -126,6 +175,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void updateOrPushUserData(){
+
+
+
+    }
 
     private void getCurrentLocation() {
 
@@ -137,7 +191,6 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(Location location) {
 
-                    // Got last known location. In some rare situations this can be null.
                     if (location != null) {
 
                         Log.d("LATITUDE", String.valueOf(location.getLatitude()));
