@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -14,13 +15,17 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.weuller.peladaesporteclube.Services.DialogService;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final int REQUEST_FINE_LOCATION = 0;
-
+    private FusedLocationProviderClient mFusedLocationClient;
     private FirebaseAuth mAuth;
+    private Location currentLocation;
 
     private Button btnExit, btnMap, btnChat;
     private TextView txtUser;
@@ -48,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
             //TEM PERMISSÃO para localização hABILITA O BOTÃO
             btnMap.setEnabled(true);
+            getCurrentLocation();
         }
 
         mAuth = FirebaseAuth.getInstance();
@@ -108,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                     btnMap.setEnabled(true);
+                    getCurrentLocation();
                 }
                 else{
 
@@ -119,6 +126,33 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+    private void getCurrentLocation() {
+
+        try {
+
+            mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+            mFusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+
+                    // Got last known location. In some rare situations this can be null.
+                    if (location != null) {
+
+                        Log.d("LATITUDE", String.valueOf(location.getLatitude()));
+                        Log.d("LONGITUDE", String.valueOf(location.getLongitude()));
+
+                        currentLocation = location;
+                    }
+                }
+            });
+
+        } catch (SecurityException e) {
+
+            dialog.showAlertDialog("Verifique se o seu GPS está ligado ou se você tem as permissões necessárias para usar esse recurso.", "Erro", MainActivity.this);
+        }
+    }
 
     private void loadPermissions(String perm, int requestCode) {
 
