@@ -1,7 +1,5 @@
 package com.example.weuller.peladaesporteclube;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -15,7 +13,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.weuller.peladaesporteclube.Models.ChatMessage;
 import com.example.weuller.peladaesporteclube.Models.User;
 import com.example.weuller.peladaesporteclube.Services.DialogService;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -28,10 +25,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean userExists = false;
     private boolean userCreatedOrUpdated = false;
+    private String userKey = "";
 
 
     @Override
@@ -94,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
                     userList.clear();
 
                     for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+
+                        userKey = postSnapshot.getKey();
                         User user = postSnapshot.getValue(User.class);
 
                         userList.add(user);
@@ -189,12 +189,23 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateOrPushUserData(){
 
+        //atualiza latitude e longitude do usuário
         if(userExists){
-            //TODO: atualizar dados
+            //TODO: testar melhor atualizaçao de localizacao
+
+            //30 - 60
+
+            DatabaseReference hopperRef = myRef.child(userKey);
+            Map<String, Object> hopperUpdates = new HashMap<String, Object>();
+            hopperUpdates.put("latitude", currentLocation.getLatitude());
+            hopperUpdates.put("longitude", currentLocation.getLongitude());
+
+            hopperRef.updateChildren(hopperUpdates);
+
         }
         else{
 
-            //registra dados
+            //registra dados do usuário
 
             User user = new User();
             user.setName(mAuth.getCurrentUser().getDisplayName());
