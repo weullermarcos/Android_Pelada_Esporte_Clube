@@ -1,7 +1,10 @@
 package com.example.weuller.peladaesporteclube;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,7 +42,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 public class LoginActivity extends AppCompatActivity implements  GoogleApiClient.OnConnectionFailedListener{
 
     private static final String TAG = "LOG";
-
+    private static final int REQUEST_FINE_LOCATION = 0;
     EditText edtEmail, edtPassword;
     Button btnSigin, btnRegister;
     SignInButton btnGoogle;
@@ -59,6 +62,8 @@ public class LoginActivity extends AppCompatActivity implements  GoogleApiClient
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        loadPermissions(android.Manifest.permission.ACCESS_FINE_LOCATION, REQUEST_FINE_LOCATION);
 
         //verifica se o usuárioe está logado
         if(FirebaseAuth.getInstance().getCurrentUser() != null){
@@ -183,6 +188,23 @@ public class LoginActivity extends AppCompatActivity implements  GoogleApiClient
     }
 
     @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+
+        switch (requestCode) {
+
+            case REQUEST_FINE_LOCATION: {
+
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                }
+                else{
+                    dialog.showAlertDialog("Algumas funcionalidades podem não funcionar corretamente, caso a permissão de localização não seja concedida!", "Aviso", LoginActivity.this);
+                }
+                return;
+            }
+        }
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -270,6 +292,16 @@ public class LoginActivity extends AppCompatActivity implements  GoogleApiClient
                         }
                     }
                 });
+    }
+
+
+    private void loadPermissions(String perm, int requestCode) {
+
+        if (ContextCompat.checkSelfPermission(this, perm) != PackageManager.PERMISSION_GRANTED) {
+            if (!ActivityCompat.shouldShowRequestPermissionRationale(this, perm)) {
+                ActivityCompat.requestPermissions(this, new String[]{perm},requestCode);
+            }
+        }
     }
 
     private void signIn() {

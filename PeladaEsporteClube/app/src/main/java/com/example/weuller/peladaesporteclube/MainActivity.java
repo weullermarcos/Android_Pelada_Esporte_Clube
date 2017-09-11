@@ -32,7 +32,6 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int REQUEST_FINE_LOCATION = 0;
     private FusedLocationProviderClient mFusedLocationClient;
     private FirebaseAuth mAuth;
     private FirebaseDatabase database;
@@ -55,8 +54,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        loadPermissions(android.Manifest.permission.ACCESS_FINE_LOCATION, REQUEST_FINE_LOCATION);
-
         btnExit = (Button) findViewById(R.id.main_btnExit);
         btnMap = (Button) findViewById(R.id.main_btnMap);
         btnChat = (Button) findViewById(R.id.main_btnChat);
@@ -71,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
         if(mAuth.getCurrentUser().getDisplayName() != null) {
 
             String user = mAuth.getCurrentUser().getDisplayName();
-
             //mAuth.getCurrentUser().getPhotoUrl();
 
             if(user != null && user.isEmpty())
@@ -80,13 +76,29 @@ public class MainActivity extends AppCompatActivity {
             txtUser.setText(user);
         }
 
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            //NÀO TEM PERMISSÃO para localização DESABILITA O BOTÃO
+            btnMap.setEnabled(false);
+
+            //como não foi habilitada a permissão para uso de localização não será atualizada as informações de localização
+            userCreatedOrUpdated = true;
+        }
+        else{
+
+            //TEM PERMISSÃO para localização hABILITA O BOTÃO
+            btnMap.setEnabled(true);
+            userCreatedOrUpdated = false;
+        }
+
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                if(userCreatedOrUpdated)
+                if(userCreatedOrUpdated) {
+                    dialog.hideProgressDialog();
                     return;
-
+                }
                     try {
 
                     userList.clear();
@@ -110,6 +122,9 @@ public class MainActivity extends AppCompatActivity {
                 catch (Exception e){
                     dialog.hideProgressDialog();
                 }
+                finally {
+                        dialog.hideProgressDialog();
+                    }
             }
 
             @Override
@@ -121,17 +136,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Erro ao carregar informações do usuário. verifique a sua conexão com a internet.", Toast.LENGTH_SHORT).show();
             }
         });
-
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            //NÀO TEM PERMISSÃO para localização DESABILITA O BOTÃO
-            btnMap.setEnabled(false);
-        }
-        else{
-
-            //TEM PERMISSÃO para localização hABILITA O BOTÃO
-            btnMap.setEnabled(true);
-        }
 
 
         btnMap.setOnClickListener(new View.OnClickListener() {
@@ -168,26 +172,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
 
-        switch (requestCode) {
-
-            case REQUEST_FINE_LOCATION: {
-
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                    btnMap.setEnabled(true);
-                }
-                else{
-
-                    btnMap.setEnabled(false);
-                    dialog.showAlertDialog("Algumas funcionalidades podem não funcionar corretamente, caso a permissão de localização não seja concedida!", "Aviso", MainActivity.this);
-                }
-                return;
-            }
-        }
-    }
 
     private void updateOrPushUserData(){
 
@@ -247,15 +232,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (SecurityException e) {
 
             dialog.showAlertDialog("Verifique se o seu GPS está ligado ou se você tem as permissões necessárias para usar esse recurso.", "Erro", MainActivity.this);
-        }
-    }
-
-    private void loadPermissions(String perm, int requestCode) {
-
-        if (ContextCompat.checkSelfPermission(this, perm) != PackageManager.PERMISSION_GRANTED) {
-            if (!ActivityCompat.shouldShowRequestPermissionRationale(this, perm)) {
-                ActivityCompat.requestPermissions(this, new String[]{perm},requestCode);
-            }
         }
     }
 }
