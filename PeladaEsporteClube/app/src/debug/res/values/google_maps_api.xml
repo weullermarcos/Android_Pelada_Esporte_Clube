@@ -21,6 +21,9 @@
     string in this file.
     -->
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">
-        AIzaSyAAI8UJx7XHenrHhW-XqHw7gaspOdgSsoA
+        <!--Descomentar linha abaixo para usar a chave para o Mac:-->
+        <!--AIzaSyAAI8UJx7XHenrHhW-XqHw7gaspOdgSsoA-->
+        <!--Descomentar linha abaixo para usar a chave para o Windows (Trabalho - Weuller):-->
+        AIzaSyBptET7LECaveFdpgabzBGqD1N6CqGxu1A
     </string>
 </resources>
