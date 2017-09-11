@@ -107,7 +107,9 @@ public class MainActivity extends AppCompatActivity {
                     getCurrentLocation();
                 }
 
-                catch (Exception e){}
+                catch (Exception e){
+                    dialog.hideProgressDialog();
+                }
             }
 
             @Override
@@ -191,10 +193,8 @@ public class MainActivity extends AppCompatActivity {
 
         //atualiza latitude e longitude do usuário
         if(userExists){
+
             //TODO: testar melhor atualizaçao de localizacao
-
-            //30 - 60
-
             DatabaseReference hopperRef = myRef.child(userKey);
             Map<String, Object> hopperUpdates = new HashMap<String, Object>();
             hopperUpdates.put("latitude", currentLocation.getLatitude());
@@ -206,7 +206,6 @@ public class MainActivity extends AppCompatActivity {
         else{
 
             //registra dados do usuário
-
             User user = new User();
             user.setName(mAuth.getCurrentUser().getDisplayName());
             user.setEmail(mAuth.getCurrentUser().getEmail());
