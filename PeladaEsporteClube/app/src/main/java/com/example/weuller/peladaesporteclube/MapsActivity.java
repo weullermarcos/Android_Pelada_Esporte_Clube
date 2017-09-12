@@ -105,6 +105,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                     if(!iscCentered) {
                         mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 12.0f));
                         iscCentered = true;
                     }
 
