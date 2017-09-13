@@ -24,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -148,15 +149,39 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                         FootballField footballField = postSnapshot.getValue(FootballField.class);
                         footballFields.add(footballField);
+                    }
+
+                    //gera um número aleatório
+                    Random gerador = new Random();
+                    int num1 = gerador.nextInt(footballFields.size() - 1);
+                    int num2 = gerador.nextInt(footballFields.size() - 1);
+                    int count = 0;
+
+                    for (FootballField footballField : footballFields) {
 
                         LatLng location = new LatLng(footballField.getLatitude(), footballField.getLongitude());
 
-                        mMap.addMarker(
+                        //se for uma quadra seleciona pinta de azul
+                        if(count == num1 || count ==num2){
+
+                            mMap.addMarker(
                                     new MarkerOptions()
                                             .position(location)
                                             .title(footballField.getName())
-                                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
-                            );
+                                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                        }
+                        else {
+
+                            mMap.addMarker(
+                                    new MarkerOptions()
+                                            .position(location)
+                                            .title(footballField.getName())
+                                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+
+                        }
+
+                        count ++;
+
                     }
                 }
 
