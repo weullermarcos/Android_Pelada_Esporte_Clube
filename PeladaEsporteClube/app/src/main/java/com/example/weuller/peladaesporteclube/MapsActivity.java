@@ -3,6 +3,8 @@ package com.example.weuller.peladaesporteclube;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.Toast;
 
 import com.example.weuller.peladaesporteclube.Models.FootballField;
@@ -52,6 +54,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.layout.menu_map, menu);
+//        return true;
+
+        return super.onCreateOptionsMenu(menu);
+    }
 
     /**
      * Manipulates the map once available.
