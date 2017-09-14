@@ -12,7 +12,7 @@
         android:id="@+id/lltMap"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0">
+        android:layout_weight="30">
 
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
             android:name="com.google.android.gms.maps.MapFragment"
@@ -22,7 +22,19 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/lltButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0">
 
+        <fragment
+            android:name="com.example.weuller.peladaesporteclube.BottomMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout="@layout/fragment_bottom_map" />
+
+    </LinearLayout>
 
 
 
