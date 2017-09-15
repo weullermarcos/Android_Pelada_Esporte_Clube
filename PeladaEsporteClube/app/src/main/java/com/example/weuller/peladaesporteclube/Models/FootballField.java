@@ -13,7 +13,7 @@ public class FootballField {
     String inUse;
     String isPublic;
     int vote;
-
+    boolean sugested;
 
     public String getType() {
         return type;
@@ -69,5 +69,13 @@ public class FootballField {
 
     public void setIsPublic(String isPublic) {
         this.isPublic = isPublic;
+    }
+
+    public boolean isSugested() {
+        return sugested;
+    }
+
+    public void setSugested(boolean sugested) {
+        this.sugested = sugested;
     }
 }

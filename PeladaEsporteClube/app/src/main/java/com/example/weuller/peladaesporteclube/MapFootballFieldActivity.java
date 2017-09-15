@@ -1,7 +1,5 @@
 package com.example.weuller.peladaesporteclube;
 
-import android.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,7 +13,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -81,6 +78,14 @@ public class MapFootballFieldActivity extends AppCompatActivity implements OnMap
 
                     BottomMapFragment bottomMapFragment = (BottomMapFragment)getSupportFragmentManager().findFragmentById(R.id.map_football_field_fgmtBottomMap);
                     bottomMapFragment.changeParams(footballField);
+
+                    if(footballField.isSugested()){
+                        bottomMapFragment.setBtnVoteVisible();
+                    }
+                    else {
+                        bottomMapFragment.setBtnVoteInvisible();
+                    }
+
                 }
                 else{
 
@@ -218,6 +223,8 @@ public class MapFootballFieldActivity extends AppCompatActivity implements OnMap
                                                .position(location)
                                                .title(footballField.getName())
                                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+
+                            footballField.setSugested(true);
                         }
                         else {
 
@@ -227,6 +234,7 @@ public class MapFootballFieldActivity extends AppCompatActivity implements OnMap
                                                .title(footballField.getName())
                                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
 
+                            footballField.setSugested(false);
                         }
 
                         myMarker.setTag(footballField);

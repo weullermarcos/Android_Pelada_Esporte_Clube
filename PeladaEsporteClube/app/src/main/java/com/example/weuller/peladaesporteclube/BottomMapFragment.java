@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.weuller.peladaesporteclube.Models.FootballField;
 
@@ -43,7 +44,7 @@ public class BottomMapFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-
+                Toast.makeText(getActivity().getApplicationContext(), "Votou", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -58,4 +59,13 @@ public class BottomMapFragment extends Fragment {
         txtIsPublic.setText(footballField.getIsPublic());
     }
 
+    public void setBtnVoteVisible(){
+
+        btnVote.setVisibility(View.VISIBLE);
+    }
+
+    public void setBtnVoteInvisible(){
+
+        btnVote.setVisibility(View.INVISIBLE);
+    }
 }
