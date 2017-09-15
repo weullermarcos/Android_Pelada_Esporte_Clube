@@ -33,7 +33,17 @@
     </LinearLayout>
 
     <Button
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="50dp"
+        android:id="@+id/main_btnScheduleFootball"
+        android:text="Marcar Futebol"
+        android:background="#689F38"
+        android:textColor="#FFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"/>
+
+    <Button
+        android:layout_marginTop="50dp"
         android:id="@+id/main_btnMap"
         android:text="Quadras de Futebol"
         android:background="#689F38"
@@ -43,7 +53,7 @@
         android:layout_gravity="bottom"/>
 
     <Button
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="50dp"
         android:id="@+id/main_btnChat"
         android:text="Chat"
         android:background="#689F38"
@@ -53,7 +63,7 @@
         android:layout_gravity="bottom"/>
 
     <Button
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="50dp"
         android:id="@+id/main_btnExit"
         android:text="Sair"
         android:background="#689F38"

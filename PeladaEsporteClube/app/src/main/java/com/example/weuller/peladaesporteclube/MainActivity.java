@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference myRef;
     private Location currentLocation;
 
-    private Button btnExit, btnMap, btnChat;
+    private Button btnExit, btnMap, btnChat, btnScheduleFootball;
     private TextView txtUser;
 
     private DialogService dialog = new DialogService();
@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         btnExit = (Button) findViewById(R.id.main_btnExit);
         btnMap = (Button) findViewById(R.id.main_btnMap);
         btnChat = (Button) findViewById(R.id.main_btnChat);
+        btnScheduleFootball = (Button) findViewById(R.id.main_btnScheduleFootball);
         txtUser = (TextView) findViewById(R.id.main_txtUser);
 
         database = FirebaseDatabase.getInstance();
@@ -156,6 +157,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnScheduleFootball.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MainActivity.this, ScheduleFootballActivity.class);
+                startActivity(intent);
+            }
+        });
+        
         btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -169,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
+
     }
 
 
