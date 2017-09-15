@@ -97,6 +97,21 @@ public class MapFootballFieldActivity extends AppCompatActivity implements OnMap
             }
         });
 
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+
+                LinearLayout.LayoutParams param;
+                param = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        0.0f
+                );
+
+                lltMap.setLayoutParams(param);
+            }
+        });
+
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("users");
         mAuth = FirebaseAuth.getInstance();
