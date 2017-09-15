@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.weuller.peladaesporteclube.Models.FootballField;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,7 +18,7 @@ import android.widget.TextView;
 public class BottomMapFragment extends Fragment {
 
     TextView txtTitle, txtType, txtIsPublic, txtInUse;
-    private Button btnVote;
+    Button btnVote;
 
     public BottomMapFragment() {
         // Required empty public constructor
@@ -34,8 +36,8 @@ public class BottomMapFragment extends Fragment {
         txtTitle = (TextView) view.findViewById(R.id.bottom_map_txtTitle);
         txtIsPublic = (TextView) view.findViewById(R.id.bottom_map_txtIsPublic);
 
-
-        btnVote = (Button) view.findViewById(R.id.bottom_map_btnVote);
+        btnVote   = (Button) view.findViewById(R.id.bottom_map_btnVote);
+//      btnMarket = (Button) view.findViewById(R.id.btnMarket);
 
         btnVote.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +47,15 @@ public class BottomMapFragment extends Fragment {
             }
         });
 
-        return inflater.inflate(R.layout.fragment_bottom_map, container, false);
+        return view;
+    }
+
+    public void changeParams(FootballField footballField){
+
+        txtType.setText(footballField.getType());
+        txtInUse.setText(footballField.getInUse());
+        txtTitle.setText(footballField.getName());
+        txtIsPublic.setText(footballField.getIsPublic());
     }
 
 }

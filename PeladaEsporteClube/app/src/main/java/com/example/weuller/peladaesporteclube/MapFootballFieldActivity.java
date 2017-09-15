@@ -47,8 +47,6 @@ public class MapFootballFieldActivity extends AppCompatActivity implements OnMap
 
     private LinearLayout lltMap, lltBottomScreen;
 
-    Fragment fgmtBottomMap;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +54,6 @@ public class MapFootballFieldActivity extends AppCompatActivity implements OnMap
 
         lltMap = (LinearLayout) findViewById(R.id.map_football_field_lltMap);
         lltBottomScreen = (LinearLayout) findViewById(R.id.map_football_field_lltBottomScreen);
-//        fgmtBottomMap = (Fragment) findViewById(R.id.map_football_field_fgmtBottomMap);
 
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -81,6 +78,9 @@ public class MapFootballFieldActivity extends AppCompatActivity implements OnMap
                             LinearLayout.LayoutParams.MATCH_PARENT,
                             30.0f
                     );
+
+                    BottomMapFragment bottomMapFragment = (BottomMapFragment)getSupportFragmentManager().findFragmentById(R.id.map_football_field_fgmtBottomMap);
+                    bottomMapFragment.changeParams(footballField);
                 }
                 else{
 
@@ -89,7 +89,6 @@ public class MapFootballFieldActivity extends AppCompatActivity implements OnMap
                             LinearLayout.LayoutParams.MATCH_PARENT,
                             0.0f
                     );
-
                 }
 
                 lltMap.setLayoutParams(param);
