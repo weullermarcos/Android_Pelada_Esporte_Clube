@@ -4,6 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
     tools:context="com.example.weuller.peladaesporteclube.ScheduleFootballActivity">
+
+    <TextView
+        android:id="@+id/bottom_map_txtTitle"
+        android:layout_margin="10dp"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:text="Marcar Futebol"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <DatePicker
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </DatePicker>
+
+    <!--<TimePicker-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"></TimePicker>-->
 
 </LinearLayout>
