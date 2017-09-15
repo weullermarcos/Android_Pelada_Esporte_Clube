@@ -3,6 +3,7 @@ package com.example.weuller.peladaesporteclube;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.weuller.peladaesporteclube.Models.FootballField;
@@ -15,6 +16,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -41,19 +43,36 @@ public class MapFootballFieldActivity extends AppCompatActivity implements OnMap
 
     private boolean iscCentered = false;
 
+    LinearLayout lltMap, lltBottomScreen;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_football_field);
 
+        lltMap = (LinearLayout) findViewById(R.id.map_football_field_lltMap);
+        lltBottomScreen = (LinearLayout) findViewById(R.id.map_football_field_lltBottomScreen);
+
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
+
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
         mMap = googleMap;
+
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+
+
+
+                return false;
+            }
+        });
 
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("users");
@@ -193,6 +212,5 @@ public class MapFootballFieldActivity extends AppCompatActivity implements OnMap
         });
 
     }
-
 }
 

@@ -7,9 +7,8 @@
     android:orientation="vertical"
     tools:context="com.example.weuller.peladaesporteclube.MapFootballFieldActivity">
 
-
     <LinearLayout
-        android:id="@+id/lltMap"
+        android:id="@+id/map_football_field_lltMap"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="30">
@@ -23,7 +22,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/lltButton"
+        android:id="@+id/map_football_field_lltBottomScreen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0">
