@@ -1,5 +1,7 @@
 package com.example.weuller.peladaesporteclube;
 
+import android.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -43,7 +45,9 @@ public class MapFootballFieldActivity extends AppCompatActivity implements OnMap
 
     private boolean iscCentered = false;
 
-    LinearLayout lltMap, lltBottomScreen;
+    private LinearLayout lltMap, lltBottomScreen;
+
+    Fragment fgmtBottomMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +56,11 @@ public class MapFootballFieldActivity extends AppCompatActivity implements OnMap
 
         lltMap = (LinearLayout) findViewById(R.id.map_football_field_lltMap);
         lltBottomScreen = (LinearLayout) findViewById(R.id.map_football_field_lltBottomScreen);
+//        fgmtBottomMap = (Fragment) findViewById(R.id.map_football_field_fgmtBottomMap);
 
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
-
-
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -68,7 +71,28 @@ public class MapFootballFieldActivity extends AppCompatActivity implements OnMap
             @Override
             public boolean onMarkerClick(Marker marker) {
 
+                LinearLayout.LayoutParams param;
+                FootballField footballField = (FootballField) marker.getTag();
 
+                if(footballField != null)
+                {
+                    param = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            30.0f
+                    );
+                }
+                else{
+
+                    param = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            0.0f
+                    );
+
+                }
+
+                lltMap.setLayoutParams(param);
 
                 return false;
             }
@@ -159,6 +183,7 @@ public class MapFootballFieldActivity extends AppCompatActivity implements OnMap
                         footballFields.add(footballField);
                     }
 
+                    //TODO: criar algoritmo para determinar quadras recomendadas, atualmente está sendo aleatório
                     //gera um número aleatório
                     Random gerador = new Random();
                     int num1 = gerador.nextInt(footballFields.size() - 1);
@@ -169,27 +194,30 @@ public class MapFootballFieldActivity extends AppCompatActivity implements OnMap
 
                         LatLng location = new LatLng(footballField.getLatitude(), footballField.getLongitude());
 
+                        Marker myMarker;
+
                         //se for uma quadra seleciona pinta de azul
                         if(count == num1 || count ==num2){
 
-                            mMap.addMarker(
-                                    new MarkerOptions()
-                                            .position(location)
-                                            .title(footballField.getName())
-                                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                            myMarker = mMap.addMarker(
+                                       new MarkerOptions()
+                                               .position(location)
+                                               .title(footballField.getName())
+                                               .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
                         }
                         else {
 
-                            mMap.addMarker(
-                                    new MarkerOptions()
-                                            .position(location)
-                                            .title(footballField.getName())
-                                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                            myMarker = mMap.addMarker(
+                                       new MarkerOptions()
+                                               .position(location)
+                                               .title(footballField.getName())
+                                               .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
 
                         }
 
-                        count ++;
+                        myMarker.setTag(footballField);
 
+                        count ++;
                     }
                 }
 

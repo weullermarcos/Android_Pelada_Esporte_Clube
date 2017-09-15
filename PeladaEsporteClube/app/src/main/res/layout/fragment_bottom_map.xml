@@ -7,6 +7,7 @@
 
 
     <TextView
+        android:id="@+id/bottom_map_txtTitle"
         android:layout_margin="10dp"
         android:textSize="20dp"
         android:gravity="center"
@@ -103,7 +104,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/bottom_map_btnVotar"
+            android:id="@+id/bottom_map_btnVote"
             android:background="#4087F4"
             android:textColor="#FFFFFF"
             android:layout_marginRight="20dp"

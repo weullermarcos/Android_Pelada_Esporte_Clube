@@ -11,7 +11,7 @@
         android:id="@+id/map_football_field_lltMap"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="30">
+        android:layout_weight="0">
 
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
             android:name="com.google.android.gms.maps.MapFragment"
@@ -28,6 +28,7 @@
         android:layout_weight="0">
 
         <fragment
+            android:id="@+id/map_football_field_fgmtBottomMap"
             android:name="com.example.weuller.peladaesporteclube.BottomMapFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
