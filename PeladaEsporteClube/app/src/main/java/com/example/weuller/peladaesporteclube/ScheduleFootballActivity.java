@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 
 import java.util.Calendar;
@@ -17,8 +18,9 @@ public class ScheduleFootballActivity extends AppCompatActivity {
     private String selectedDate, selectedTime;
     private Spinner spnType;
     private Button btnFindSuggested;
+    private ListView lstSuggested;
 
-    ArrayAdapter<String> adpType;
+    private ArrayAdapter<String> adpType;
 
     public String getSelectedDate() {
         return selectedDate;
@@ -47,6 +49,7 @@ public class ScheduleFootballActivity extends AppCompatActivity {
         edtDate = (EditText) findViewById(R.id.schedule_football_edtDate);
         edtTime = (EditText) findViewById(R.id.schedule_football_edtTime);
         btnFindSuggested = (Button) findViewById(R.id.schedule_football_btnFindSuggested);
+        lstSuggested = (ListView) findViewById(R.id.schedule_football_lstSuggested);
 
         edtDate.setText(getCurrentDate());
         edtTime.setText(getCurrentTime());
