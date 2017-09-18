@@ -2,6 +2,7 @@ package com.example.weuller.peladaesporteclube;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,7 +11,6 @@ import java.util.Calendar;
 
 public class ScheduleFootballActivity extends AppCompatActivity {
 
-    private Button btnTimePicker, btnDatePicker;
     private EditText edtDate, edtTime;
     private String selectedDate, selectedTime;
 
@@ -20,6 +20,7 @@ public class ScheduleFootballActivity extends AppCompatActivity {
 
     public void setSelectedDate(String selectedDate) {
         this.selectedDate = selectedDate;
+        edtDate.setText(selectedDate);
     }
 
     public String getSelectedTime() {
@@ -28,6 +29,7 @@ public class ScheduleFootballActivity extends AppCompatActivity {
 
     public void setSelectedTime(String selectedTime) {
         this.selectedTime = selectedTime;
+        edtTime.setText(selectedTime);
     }
 
     @Override
@@ -35,8 +37,6 @@ public class ScheduleFootballActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule_football);
 
-        btnTimePicker = (Button) findViewById(R.id.btnTimePicker);
-        btnDatePicker = (Button) findViewById(R.id.btnDatePicker);
         edtDate = (EditText) findViewById(R.id.schedule_football_edtDate);
         edtTime = (EditText) findViewById(R.id.schedule_football_edtTime);
 
@@ -44,22 +44,29 @@ public class ScheduleFootballActivity extends AppCompatActivity {
         edtTime.setText(getCurrentTime());
 
 
-
-        btnTimePicker.setOnClickListener(new View.OnClickListener() {
+        edtDate.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
+            public boolean onTouch(View v, MotionEvent event) {
 
-                TimePickerFragment fragment = new TimePickerFragment();
-                fragment.show(getSupportFragmentManager(), "timePicker");
+                if(event.getAction()==MotionEvent.ACTION_UP)
+                {
+                    DatePickerFragment fragment = new DatePickerFragment();
+                    fragment.show(getSupportFragmentManager(), "datePicker");
+                }
+                return true;
             }
         });
 
-        btnDatePicker.setOnClickListener(new View.OnClickListener() {
+        edtTime.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
+            public boolean onTouch(View v, MotionEvent event) {
 
-                DatePickerFragment fragment = new DatePickerFragment();
-                fragment.show(getSupportFragmentManager(), "datePicker");
+                if(event.getAction()==MotionEvent.ACTION_UP)
+                {
+                    TimePickerFragment fragment = new TimePickerFragment();
+                    fragment.show(getSupportFragmentManager(), "timePicker");
+                }
+                return true;
             }
         });
     }

@@ -33,11 +33,11 @@
 
         <EditText
             android:id="@+id/schedule_football_edtDate"
-            android:text="          /          /          "
             android:textSize="14dp"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp" />
+            android:layout_marginLeft="5dp"
+            android:focusableInTouchMode="false"/>
 
     </LinearLayout>
 
@@ -57,26 +57,12 @@
 
         <EditText
             android:id="@+id/schedule_football_edtTime"
-            android:text="          :                     "
             android:textSize="14dp"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp" />
+            android:layout_marginLeft="5dp"
+            android:focusableInTouchMode="false"/>
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/btnTimePicker"
-        android:text="Time Picker"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/btnDatePicker"
-        android:text="Date Picker"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-
 
 </LinearLayout>
