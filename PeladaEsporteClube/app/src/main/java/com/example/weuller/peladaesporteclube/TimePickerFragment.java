@@ -39,10 +39,7 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
         ScheduleFootballActivity scheduleFootballActivity = (ScheduleFootballActivity) getActivity();
-
         String selectedTime = Integer.toString(hourOfDay) + ":" + Integer.toString(minute);
-
         scheduleFootballActivity.setSelectedTime(selectedTime);
-
     }
 }

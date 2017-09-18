@@ -45,10 +45,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
         ScheduleFootballActivity scheduleFootballActivity = (ScheduleFootballActivity) getActivity();
-
-        String selectedDate = Integer.toString(dayOfMonth) + "/" + Integer.toString(month) + "/" + Integer.toString(year);
-
+        String selectedDate = Integer.toString(dayOfMonth) + "/" + Integer.toString(month + 1) + "/" + Integer.toString(year);
         scheduleFootballActivity.setSelectedDate(selectedDate);
-
     }
 }
