@@ -184,7 +184,8 @@ public class ScheduleFootballActivity extends AppCompatActivity {
 
                     for (FootballField footballField : footballFields) {
 
-                        if(count == num1 || count ==num2){
+                        if((count == num1 || count ==num2) &&
+                                footballField.getType().toLowerCase().equals(spnType.getSelectedItem().toString().toLowerCase())){
 
                             footballField.setSugested(true);
 
