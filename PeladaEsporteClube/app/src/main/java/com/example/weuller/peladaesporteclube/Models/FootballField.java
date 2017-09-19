@@ -14,7 +14,7 @@ public class FootballField {
     String inUse;
     String isPublic;
     int vote;
-    boolean sugested;
+    String suggested;
 
     public String getType() {
         return type;
@@ -72,19 +72,19 @@ public class FootballField {
         this.isPublic = isPublic;
     }
 
-    public boolean isSugested() {
-        return sugested;
-    }
-
-    public void setSugested(boolean sugested) {
-        this.sugested = sugested;
-    }
-
     public String getKey() {
         return key;
     }
 
     public void setKey(String key) {
         this.key = key;
+    }
+
+    public String getSuggested() {
+        return suggested;
+    }
+
+    public void setSuggested(String suggested) {
+        this.suggested = suggested;
     }
 }

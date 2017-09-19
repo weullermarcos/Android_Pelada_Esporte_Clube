@@ -79,7 +79,7 @@ public class MapFootballFieldActivity extends AppCompatActivity implements OnMap
                     BottomMapFragment bottomMapFragment = (BottomMapFragment)getSupportFragmentManager().findFragmentById(R.id.map_football_field_fgmtBottomMap);
                     bottomMapFragment.changeParams(footballField);
 
-                    if(footballField.isSugested()){
+                    if(footballField.getSuggested().toLowerCase().equals("sim")){
                         bottomMapFragment.setBtnVoteVisible();
                     }
                     else {
@@ -224,7 +224,7 @@ public class MapFootballFieldActivity extends AppCompatActivity implements OnMap
                                                .title(footballField.getName())
                                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 
-                            footballField.setSugested(true);
+                            footballField.setSuggested("sim");
                         }
                         else {
 
@@ -234,7 +234,7 @@ public class MapFootballFieldActivity extends AppCompatActivity implements OnMap
                                                .title(footballField.getName())
                                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
 
-                            footballField.setSugested(false);
+                            footballField.setSuggested("não");
                         }
 
                         myMarker.setTag(footballField);
