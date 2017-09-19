@@ -39,17 +39,14 @@ public class ScheduleFootballActivity extends AppCompatActivity {
     private Spinner spnType;
     private Button btnFindSuggested, btnSchedule;
     private ListView lstSuggested;
-
     private ArrayAdapter<String> adpType;
     private ArrayAdapter<String> adpSuggested;
-
     private FirebaseAuth mAuth;
     private FirebaseDatabase database;
     private DatabaseReference myRef;
-
     private List<FootballField> footballFields = new ArrayList<>();
-
     private DialogService dialog = new DialogService();
+    private boolean footballFieldUpdated = false;
 
 
     public String getSelectedDate() {
@@ -126,6 +123,7 @@ public class ScheduleFootballActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                footballFieldUpdated = false;
                 adpSuggested.clear();
                 dialog.showProgressDialog("Carregando informações...", "Aguarde", ScheduleFootballActivity.this);
                 loadFootballFields();
@@ -137,10 +135,13 @@ public class ScheduleFootballActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                footballFieldUpdated = true;
+
                 dialog.showProgressDialog("Marcando Futebol.", "Aguarde", ScheduleFootballActivity.this);
 
                 try {
 
+                    //Atualiza dados da quadra
                     for (FootballField footballField : footballFields) {
 
                         String userKey = footballField.getKey();
@@ -206,6 +207,9 @@ public class ScheduleFootballActivity extends AppCompatActivity {
 
                 try {
 
+                    if(footballFieldUpdated)
+                        return;
+
                     footballFields.clear();
 
                     for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
@@ -215,7 +219,7 @@ public class ScheduleFootballActivity extends AppCompatActivity {
                         footballFields.add(footballField);
                     }
 
-                    //TODO: requisitar do servidor as quadras sugeridas, atualmente está sendo feito de forma aleatoria
+                    //TODO: (futuramente) requisitar do servidor as quadras sugeridas baseadas em um algoritmo, atualmente está sendo feito de forma aleatoria
 
                     Random gerador = new Random();
                     int num1 = gerador.nextInt(footballFields.size() - 1);
@@ -239,9 +243,6 @@ public class ScheduleFootballActivity extends AppCompatActivity {
 
                         count ++;
                     }
-
-                    //TODO: atualizar no FIREBASE lista de quadras sugeridas
-
 
                 } catch (Exception e) {
                     Toast.makeText(ScheduleFootballActivity.this, "Erro ao carregar informações de quadras.", Toast.LENGTH_SHORT).show();
