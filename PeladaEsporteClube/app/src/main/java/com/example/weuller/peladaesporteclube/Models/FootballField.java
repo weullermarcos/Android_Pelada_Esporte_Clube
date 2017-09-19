@@ -8,6 +8,7 @@ public class FootballField {
 
     String type;
     String name;
+    String key;
     double latitude;
     double longitude;
     String inUse;
@@ -77,5 +78,13 @@ public class FootballField {
 
     public void setSugested(boolean sugested) {
         this.sugested = sugested;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 }

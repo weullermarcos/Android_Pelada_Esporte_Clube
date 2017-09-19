@@ -172,6 +172,7 @@ public class ScheduleFootballActivity extends AppCompatActivity {
                     for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
 
                         FootballField footballField = postSnapshot.getValue(FootballField.class);
+                        footballField.setKey(postSnapshot.getKey());
                         footballFields.add(footballField);
                     }
 
@@ -200,7 +201,7 @@ public class ScheduleFootballActivity extends AppCompatActivity {
                         count ++;
                     }
 
-                    //TODO: atualizar no FIREBASE lista de quadas sugeridas
+                    //TODO: atualizar no FIREBASE lista de quadras sugeridas
 
 
                 } catch (Exception e) {

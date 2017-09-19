@@ -182,9 +182,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-
-
     private void updateOrPushUserData(){
 
         //atualiza latitude e longitude do usuário
