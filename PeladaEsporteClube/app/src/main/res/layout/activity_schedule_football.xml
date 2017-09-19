@@ -1,123 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_margin="10dp"
+    android:fillViewport="true">
     tools:context="com.example.weuller.peladaesporteclube.ScheduleFootballActivity">
 
-    <TextView
-        android:id="@+id/bottom_map_txtTitle"
-        android:layout_margin="10dp"
-        android:textSize="20dp"
-        android:gravity="center"
-        android:text="Marcar Futebol"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <!--Data-->
     <LinearLayout
-        android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
 
         <TextView
-            android:text="Data: "
-            android:textSize="16dp"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
+            android:id="@+id/bottom_map_txtTitle"
+            android:layout_margin="10dp"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:text="Marcar Futebol"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <EditText
-            android:id="@+id/schedule_football_edtDate"
-            android:textSize="14dp"
+        <!--Data-->
+        <LinearLayout
+            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:focusableInTouchMode="false"/>
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <TextView
+                android:text="Data: "
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-    <!--Hora-->
-    <LinearLayout
-        android:layout_margin="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            <EditText
+                android:id="@+id/schedule_football_edtDate"
+                android:textSize="14dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:focusableInTouchMode="false"/>
 
-        <TextView
-            android:text="Hora: "
-            android:textSize="16dp"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        </LinearLayout>
 
-        <EditText
-            android:id="@+id/schedule_football_edtTime"
-            android:textSize="14dp"
+        <!--Hora-->
+        <LinearLayout
+            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:focusableInTouchMode="false"/>
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <TextView
+                android:text="Hora: "
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-    <!--Tipo-->
-    <LinearLayout
-        android:layout_margin="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            <EditText
+                android:id="@+id/schedule_football_edtTime"
+                android:textSize="14dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:focusableInTouchMode="false"/>
 
-        <TextView
-            android:text="Tipo: "
-            android:textSize="16dp"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
+        </LinearLayout>
+
+        <!--Tipo-->
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:text="Tipo: "
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Spinner
+                android:id="@+id/schedule_football_spnType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </Spinner>
+
+        </LinearLayout>
+
+        <Button
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:id="@+id/schedule_football_btnFindSuggested"
+            android:text="Buscar quadras sugeridas"
+            android:background="#689F38"
+            android:textColor="#FFFFFF"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <Spinner
-            android:id="@+id/schedule_football_spnType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/schedule_football_lltSuggestedArea"
+            android:visibility="invisible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp">
 
-        </Spinner>
+            <TextView
+                android:text="Quadras sugeridas: "
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ListView
+                android:id="@+id/schedule_football_lstSuggested"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </ListView>
+
+        </LinearLayout>
+
+        <Button
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/schedule_football_btnSchedule"
+            android:text="Marcar Futebol"
+            android:background="#689F38"
+            android:textColor="#FFFFFF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/schedule_football_btnSeeInTheMap"
+            android:text="Ver no Mapa"
+            android:background="#689F38"
+            android:textColor="#FFFFFF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
 
     </LinearLayout>
 
-    <Button
-        android:layout_margin="10dp"
-        android:id="@+id/schedule_football_btnFindSuggested"
-        android:text="Buscar quadras sugeridas"
-        android:background="#689F38"
-        android:textColor="#FFFFFF"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
-    <TextView
-        android:text="Quadras sugeridas: "
-        android:layout_margin="10dp"
-        android:textSize="16dp"
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
-    <ListView
-        android:id="@+id/schedule_football_lstSuggested"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </ListView>
-
-    <Button
-        android:layout_margin="10dp"
-        android:id="@+id/schedule_football_btnSchedule"
-        android:text="Marcar Futebol"
-        android:background="#689F38"
-        android:textColor="#FFFFFF"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-</LinearLayout>
+</ScrollView>

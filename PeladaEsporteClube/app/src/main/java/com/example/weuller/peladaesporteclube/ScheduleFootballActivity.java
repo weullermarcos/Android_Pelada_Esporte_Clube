@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -37,7 +38,8 @@ public class ScheduleFootballActivity extends AppCompatActivity {
     private EditText edtDate, edtTime;
     private String selectedDate, selectedTime;
     private Spinner spnType;
-    private Button btnFindSuggested, btnSchedule;
+    private LinearLayout lltSuggestedArea;
+    private Button btnFindSuggested, btnSchedule, btnSeeInTheMap;
     private ListView lstSuggested;
     private ArrayAdapter<String> adpType;
     private ArrayAdapter<String> adpSuggested;
@@ -77,7 +79,9 @@ public class ScheduleFootballActivity extends AppCompatActivity {
         edtTime = (EditText) findViewById(R.id.schedule_football_edtTime);
         btnFindSuggested = (Button) findViewById(R.id.schedule_football_btnFindSuggested);
         btnSchedule = (Button) findViewById(R.id.schedule_football_btnSchedule);
+        btnSeeInTheMap = (Button) findViewById(R.id.schedule_football_btnSeeInTheMap);
         lstSuggested = (ListView) findViewById(R.id.schedule_football_lstSuggested);
+        lltSuggestedArea = (LinearLayout) findViewById(R.id.schedule_football_lltSuggestedArea);
 
         edtDate.setText(getCurrentDate());
         edtTime.setText(getCurrentTime());
@@ -127,9 +131,17 @@ public class ScheduleFootballActivity extends AppCompatActivity {
                 adpSuggested.clear();
                 dialog.showProgressDialog("Carregando informações...", "Aguarde", ScheduleFootballActivity.this);
                 loadFootballFields();
+                lltSuggestedArea.setVisibility(View.VISIBLE);
             }
         });
 
+        btnSeeInTheMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                
+            }
+        });
 
         btnSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
