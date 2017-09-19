@@ -27,7 +27,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class ScheduleFootballActivity extends AppCompatActivity {
@@ -35,7 +37,7 @@ public class ScheduleFootballActivity extends AppCompatActivity {
     private EditText edtDate, edtTime;
     private String selectedDate, selectedTime;
     private Spinner spnType;
-    private Button btnFindSuggested;
+    private Button btnFindSuggested, btnSchedule;
     private ListView lstSuggested;
 
     private ArrayAdapter<String> adpType;
@@ -77,6 +79,7 @@ public class ScheduleFootballActivity extends AppCompatActivity {
         edtDate = (EditText) findViewById(R.id.schedule_football_edtDate);
         edtTime = (EditText) findViewById(R.id.schedule_football_edtTime);
         btnFindSuggested = (Button) findViewById(R.id.schedule_football_btnFindSuggested);
+        btnSchedule = (Button) findViewById(R.id.schedule_football_btnSchedule);
         lstSuggested = (ListView) findViewById(R.id.schedule_football_lstSuggested);
 
         edtDate.setText(getCurrentDate());
@@ -128,6 +131,42 @@ public class ScheduleFootballActivity extends AppCompatActivity {
                 loadFootballFields();
             }
         });
+
+
+        btnSchedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                dialog.showProgressDialog("Marcando Futebol.", "Aguarde", ScheduleFootballActivity.this);
+
+                try {
+
+                    for (FootballField footballField : footballFields) {
+
+                        String userKey = footballField.getKey();
+
+                        DatabaseReference hopperRef = myRef.child(userKey);
+                        Map<String, Object> hopperUpdates = new HashMap<String, Object>();
+                        hopperUpdates.put("inUse", footballField.getInUse());
+                        hopperUpdates.put("isPublic", footballField.getIsPublic());
+                        hopperUpdates.put("latitude", footballField.getLatitude());
+                        hopperUpdates.put("longitude", footballField.getLongitude());
+                        hopperUpdates.put("name", footballField.getName());
+                        hopperUpdates.put("suggested", footballField.getSuggested());
+                        hopperUpdates.put("type", footballField.getType());
+
+                        hopperRef.updateChildren(hopperUpdates);
+                    }
+
+                }catch (Exception e){
+                    Toast.makeText(ScheduleFootballActivity.this, "Erro ao marcar futebol", Toast.LENGTH_SHORT).show();
+                }
+                finally {
+                    dialog.hideProgressDialog();
+                }
+            }
+        });
+
     }
 
     private String getCurrentDate(){
@@ -151,9 +190,9 @@ public class ScheduleFootballActivity extends AppCompatActivity {
 
     private void populaAdapter() {
 
-        adpType.add("Campo");
         adpType.add("Quadra");
         adpType.add("Society");
+        adpType.add("Campo");
     }
 
     public void loadFootballFields() {

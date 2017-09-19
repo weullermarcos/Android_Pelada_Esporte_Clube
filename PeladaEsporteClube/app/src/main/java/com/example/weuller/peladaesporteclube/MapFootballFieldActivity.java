@@ -200,46 +200,30 @@ public class MapFootballFieldActivity extends AppCompatActivity implements OnMap
 
                         FootballField footballField = postSnapshot.getValue(FootballField.class);
                         footballFields.add(footballField);
-                    }
-
-                    //TODO: criar algoritmo para determinar quadras recomendadas, atualmente está sendo aleatório
-                    //gera um número aleatório
-                    Random gerador = new Random();
-                    int num1 = gerador.nextInt(footballFields.size() - 1);
-                    int num2 = gerador.nextInt(footballFields.size() - 1);
-                    int count = 0;
-
-                    for (FootballField footballField : footballFields) {
 
                         LatLng location = new LatLng(footballField.getLatitude(), footballField.getLongitude());
-
                         Marker myMarker;
 
                         //se for uma quadra seleciona pinta de azul
-                        if(count == num1 || count ==num2){
+                        if(footballField.getSuggested().toLowerCase().equals("sim")){
 
                             myMarker = mMap.addMarker(
-                                       new MarkerOptions()
-                                               .position(location)
-                                               .title(footballField.getName())
-                                               .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
-
-                            footballField.setSuggested("sim");
+                                    new MarkerOptions()
+                                            .position(location)
+                                            .title(footballField.getName())
+                                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
                         }
                         else {
 
                             myMarker = mMap.addMarker(
-                                       new MarkerOptions()
-                                               .position(location)
-                                               .title(footballField.getName())
-                                               .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                                    new MarkerOptions()
+                                            .position(location)
+                                            .title(footballField.getName())
+                                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
 
-                            footballField.setSuggested("não");
                         }
 
                         myMarker.setTag(footballField);
-
-                        count ++;
                     }
                 }
 

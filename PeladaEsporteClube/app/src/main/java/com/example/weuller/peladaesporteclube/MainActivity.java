@@ -187,7 +187,6 @@ public class MainActivity extends AppCompatActivity {
         //atualiza latitude e longitude do usuário
         if(userExists){
 
-            //TODO: testar melhor atualizaçao de localizacao
             DatabaseReference hopperRef = myRef.child(userKey);
             Map<String, Object> hopperUpdates = new HashMap<String, Object>();
             hopperUpdates.put("latitude", currentLocation.getLatitude());
