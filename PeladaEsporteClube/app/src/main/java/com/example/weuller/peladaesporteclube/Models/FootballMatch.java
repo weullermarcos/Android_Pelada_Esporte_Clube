@@ -1,7 +1,7 @@
 package com.example.weuller.peladaesporteclube.Models;
 
 /**
- * Created by weullermarcos on 19/09/17.
+ * Created by ismael on 19/09/17.
  */
 
 public class FootballMatch {

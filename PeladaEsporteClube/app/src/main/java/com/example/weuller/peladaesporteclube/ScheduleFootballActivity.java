@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.weuller.peladaesporteclube.Models.FootballField;
+import com.example.weuller.peladaesporteclube.Models.FootballMatch;
 import com.example.weuller.peladaesporteclube.Services.DialogService;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -172,6 +173,22 @@ public class ScheduleFootballActivity extends AppCompatActivity {
 
                         hopperRef.updateChildren(hopperUpdates);
                     }
+
+                    //atualiza dados da partida marcada
+//                    database = FirebaseDatabase.getInstance();
+//                    myRef = database.getReference("footballMatch");
+//
+//                    FootballMatch footballMatch = new FootballMatch();
+//                    footballMatch.setDate(selectedDate);
+//                    footballMatch.setFootballFieldId("XXXXXXXXXXXXXX");
+//                    footballMatch.setFootballFieldLatitude(0.0);
+//                    footballMatch.setFootballFieldLongitude(0.0);
+//                    footballMatch.setFootballFieldName("YYYYYY");
+//                    footballMatch.setHour(selectedTime);
+//
+//                    DatabaseReference newPostRef = myRef.push();
+//                    newPostRef.setValue(footballMatch);
+
 
                     LinearLayout.LayoutParams param;
 
