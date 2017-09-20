@@ -175,20 +175,18 @@ public class ScheduleFootballActivity extends AppCompatActivity {
                     }
 
                     //atualiza dados da partida marcada
-//                    database = FirebaseDatabase.getInstance();
-//                    myRef = database.getReference("footballMatch");
-//
-//                    FootballMatch footballMatch = new FootballMatch();
-//                    footballMatch.setDate(selectedDate);
-//                    footballMatch.setFootballFieldId("XXXXXXXXXXXXXX");
-//                    footballMatch.setFootballFieldLatitude(0.0);
-//                    footballMatch.setFootballFieldLongitude(0.0);
-//                    footballMatch.setFootballFieldName("YYYYYY");
-//                    footballMatch.setHour(selectedTime);
-//
-//                    DatabaseReference newPostRef = myRef.push();
-//                    newPostRef.setValue(footballMatch);
+                    database = FirebaseDatabase.getInstance();
+                    myRef = database.getReference("footballMatch");
+                    DatabaseReference hopperRef = myRef.child("00FOOTBALLMATCH0001");
+                    Map<String, Object> hopperUpdates = new HashMap<String, Object>();
 
+                    hopperUpdates.put("date", edtDate.getText().toString());
+                    hopperUpdates.put("footballFieldId", "XXXXXXXXXXXX");
+                    hopperUpdates.put("footballFieldLatitude", 0.0);
+                    hopperUpdates.put("footballFieldLongitude", 0.0);
+                    hopperUpdates.put("footballFieldName", "YYYYY");
+                    hopperUpdates.put("hour", edtDate.getText().toString());
+                    hopperRef.updateChildren(hopperUpdates);
 
                     LinearLayout.LayoutParams param;
 
