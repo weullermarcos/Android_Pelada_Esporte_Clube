@@ -185,7 +185,7 @@ public class ScheduleFootballActivity extends AppCompatActivity {
                     hopperUpdates.put("footballFieldLatitude", 0.0);
                     hopperUpdates.put("footballFieldLongitude", 0.0);
                     hopperUpdates.put("footballFieldName", "YYYYY");
-                    hopperUpdates.put("hour", edtDate.getText().toString());
+                    hopperUpdates.put("hour", edtTime.getText().toString());
                     hopperRef.updateChildren(hopperUpdates);
 
                     LinearLayout.LayoutParams param;
