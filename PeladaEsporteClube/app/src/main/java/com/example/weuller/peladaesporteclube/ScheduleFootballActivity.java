@@ -1,5 +1,6 @@
 package com.example.weuller.peladaesporteclube;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -139,7 +140,8 @@ public class ScheduleFootballActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                
+                Intent intent = new Intent(ScheduleFootballActivity.this, MapFootballFieldActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -170,6 +172,27 @@ public class ScheduleFootballActivity extends AppCompatActivity {
 
                         hopperRef.updateChildren(hopperUpdates);
                     }
+
+                    LinearLayout.LayoutParams param;
+
+                    param = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                            1.0f
+                    );
+
+                    btnSchedule.setLayoutParams(param);
+
+                    param = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                            0.0f
+                    );
+
+                    btnSeeInTheMap.setLayoutParams(param);
+
+                    Toast.makeText(ScheduleFootballActivity.this, "Futebol marcado, entre no mapa e vote na quadra que será o futebol.", Toast.LENGTH_SHORT).show();
+
 
                 }catch (Exception e){
                     Toast.makeText(ScheduleFootballActivity.this, "Erro ao marcar futebol", Toast.LENGTH_SHORT).show();
