@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.weuller.peladaesporteclube.Models.FootballField;
+import com.example.weuller.peladaesporteclube.Models.FootballMatch;
 import com.example.weuller.peladaesporteclube.Models.User;
 import com.example.weuller.peladaesporteclube.Services.DialogService;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -33,6 +34,7 @@ public class MapFootballFieldActivity extends AppCompatActivity implements OnMap
     private GoogleMap mMap;
     private List<User> userList = new ArrayList<>();
     private List<FootballField> footballFields = new ArrayList<>();
+    private List<FootballMatch> footballMaths = new ArrayList<>();
     private DialogService dialog = new DialogService();
     private LatLng myLocation = new LatLng(0.00, 0.00);
 
@@ -67,6 +69,19 @@ public class MapFootballFieldActivity extends AppCompatActivity implements OnMap
 
                 LinearLayout.LayoutParams param;
                 FootballField footballField = (FootballField) marker.getTag();
+                String date = "00/00/0000";
+                String hour = "00:00";
+
+                if(footballMaths.size() > 0){
+                    FootballMatch match = footballMaths.get(0);
+
+                    if(match != null){
+
+                        date = match.getDate();
+                        hour = match.getHour();
+                    }
+                }
+
 
                 if(footballField != null)
                 {
@@ -77,13 +92,13 @@ public class MapFootballFieldActivity extends AppCompatActivity implements OnMap
                     );
 
                     BottomMapFragment bottomMapFragment = (BottomMapFragment)getSupportFragmentManager().findFragmentById(R.id.map_football_field_fgmtBottomMap);
-                    bottomMapFragment.changeParams(footballField);
+                    bottomMapFragment.changeParams(footballField, date, hour);
 
                     if(footballField.getIsSelected().toLowerCase().equals("sim")){
-                        bottomMapFragment.setBtnVoteVisible();
+                        bottomMapFragment.setLltTimeVisible();
                     }
                     else {
-                        bottomMapFragment.setBtnVoteInvisible();
+                        bottomMapFragment.setLltTimeInvisible();
                     }
 
                 }
@@ -161,6 +176,7 @@ public class MapFootballFieldActivity extends AppCompatActivity implements OnMap
                     }
 
                     loadFootballFields();
+                    loadFootballMath();
                 }
 
                 catch (Exception e){
@@ -204,6 +220,7 @@ public class MapFootballFieldActivity extends AppCompatActivity implements OnMap
                         LatLng location = new LatLng(footballField.getLatitude(), footballField.getLongitude());
                         Marker myMarker;
 
+
                         //se for a quadra que marcou o futebol marca de azul
                         if(footballField.getIsSelected().toLowerCase().equals("sim")){
 
@@ -246,5 +263,44 @@ public class MapFootballFieldActivity extends AppCompatActivity implements OnMap
         });
 
     }
-}
 
+    public void loadFootballMath() {
+
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference("footballMatch");
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                try {
+
+                    footballMaths.clear();
+
+                    for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+
+                        FootballMatch match = postSnapshot.getValue(FootballMatch.class);
+                        footballMaths.add(match);
+                    }
+                }
+
+                catch (Exception e){
+                    Toast.makeText(MapFootballFieldActivity.this, "Erro ao carregar informações de quadras.", Toast.LENGTH_SHORT).show();
+                }
+                finally {
+                    dialog.hideProgressDialog();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+
+                Log.w("LOG", "Failed to read value.", error.toException());
+
+                dialog.hideProgressDialog();
+                Toast.makeText(MapFootballFieldActivity.this, "Erro ao carregar informações de quadras. verifique a sua conexão com a internet.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+}

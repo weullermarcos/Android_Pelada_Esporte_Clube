@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,8 +19,9 @@ import com.example.weuller.peladaesporteclube.Models.FootballField;
  */
 public class BottomMapFragment extends Fragment {
 
-    TextView txtTitle, txtType, txtIsPublic, txtInUse;
-    Button btnVote;
+    TextView txtTitle, txtType, txtIsPublic, txtInUse, txtDate, txtTime;
+    LinearLayout lltTime;
+    //Button btnVote;
 
     public BottomMapFragment() {
         // Required empty public constructor
@@ -36,36 +38,42 @@ public class BottomMapFragment extends Fragment {
         txtInUse = (TextView) view.findViewById(R.id.bottom_map_txtInUse);
         txtTitle = (TextView) view.findViewById(R.id.bottom_map_txtTitle);
         txtIsPublic = (TextView) view.findViewById(R.id.bottom_map_txtIsPublic);
+        txtDate = (TextView) view.findViewById(R.id.bottom_map_txtDate);
+        txtTime = (TextView) view.findViewById(R.id.bottom_map_txtTime);
+        lltTime = (LinearLayout) view.findViewById(R.id.bottom_map_lltTime);
 
-        btnVote   = (Button) view.findViewById(R.id.bottom_map_btnVote);
-//      btnMarket = (Button) view.findViewById(R.id.btnMarket);
-
-        btnVote.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Toast.makeText(getActivity().getApplicationContext(), "Votou", Toast.LENGTH_LONG).show();
-            }
-        });
+//        btnVote   = (Button) view.findViewById(R.id.bottom_map_btnVote);
+////      btnMarket = (Button) view.findViewById(R.id.btnMarket);
+//
+//        btnVote.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                Toast.makeText(getActivity().getApplicationContext(), "Votou", Toast.LENGTH_LONG).show();
+//            }
+//        });
 
         return view;
     }
 
-    public void changeParams(FootballField footballField){
+    public void changeParams(FootballField footballField, String date, String time){
 
         txtType.setText(footballField.getType());
         txtInUse.setText(footballField.getInUse());
         txtTitle.setText(footballField.getName());
         txtIsPublic.setText(footballField.getIsPublic());
+        txtDate.setText(date);
+        txtTime.setText(time);
+
     }
 
-    public void setBtnVoteVisible(){
+    public void setLltTimeVisible(){
 
-        btnVote.setVisibility(View.VISIBLE);
+        lltTime.setVisibility(View.VISIBLE);
     }
 
-    public void setBtnVoteInvisible(){
+    public void setLltTimeInvisible(){
 
-        btnVote.setVisibility(View.INVISIBLE);
+        lltTime.setVisibility(View.INVISIBLE);
     }
 }
