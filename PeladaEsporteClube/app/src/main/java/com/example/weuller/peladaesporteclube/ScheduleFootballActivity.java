@@ -226,7 +226,6 @@ public class ScheduleFootballActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     private String getCurrentDate(){
