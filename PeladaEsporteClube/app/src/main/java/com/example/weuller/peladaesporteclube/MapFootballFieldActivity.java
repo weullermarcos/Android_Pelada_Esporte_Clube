@@ -79,7 +79,7 @@ public class MapFootballFieldActivity extends AppCompatActivity implements OnMap
                     BottomMapFragment bottomMapFragment = (BottomMapFragment)getSupportFragmentManager().findFragmentById(R.id.map_football_field_fgmtBottomMap);
                     bottomMapFragment.changeParams(footballField);
 
-                    if(footballField.getSuggested().toLowerCase().equals("sim")){
+                    if(footballField.getIsSelected().toLowerCase().equals("sim")){
                         bottomMapFragment.setBtnVoteVisible();
                     }
                     else {
@@ -204,8 +204,8 @@ public class MapFootballFieldActivity extends AppCompatActivity implements OnMap
                         LatLng location = new LatLng(footballField.getLatitude(), footballField.getLongitude());
                         Marker myMarker;
 
-                        //se for uma quadra seleciona pinta de azul
-                        if(footballField.getSuggested().toLowerCase().equals("sim")){
+                        //se for a quadra que marcou o futebol marca de azul
+                        if(footballField.getIsSelected().toLowerCase().equals("sim")){
 
                             myMarker = mMap.addMarker(
                                     new MarkerOptions()

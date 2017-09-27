@@ -6,15 +6,16 @@ package com.example.weuller.peladaesporteclube.Models;
 
 public class FootballField {
 
-    String type;
-    String name;
-    String key;
-    double latitude;
-    double longitude;
-    String inUse;
-    String isPublic;
-    int vote;
-    String suggested;
+    private String type;
+    private String name;
+    private String key;
+    private double latitude;
+    private double longitude;
+    private String inUse;
+    private String isPublic;
+    private int vote;
+    private String suggested;
+    private String isSelected;
 
     public String getType() {
         return type;
@@ -86,6 +87,14 @@ public class FootballField {
 
     public void setSuggested(String suggested) {
         this.suggested = suggested;
+    }
+
+    public String getIsSelected() {
+        return isSelected;
+    }
+
+    public void setIsSelected(String isSelected) {
+        this.isSelected = isSelected;
     }
 
     @Override

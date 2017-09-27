@@ -170,6 +170,7 @@ public class ScheduleFootballActivity extends AppCompatActivity {
 
                         String userKey = footballField.getKey();
 
+
                         DatabaseReference hopperRef = myRef.child(userKey);
                         Map<String, Object> hopperUpdates = new HashMap<String, Object>();
                         hopperUpdates.put("inUse", footballField.getInUse());
@@ -179,6 +180,10 @@ public class ScheduleFootballActivity extends AppCompatActivity {
                         hopperUpdates.put("name", footballField.getName());
                         hopperUpdates.put("suggested", footballField.getSuggested());
                         hopperUpdates.put("type", footballField.getType());
+                        hopperUpdates.put("isSelected", "não");
+
+                        if(userKey.equals(selectedFootballFieldItem.getKey()))
+                            hopperUpdates.put("isSelected", "sim");
 
                         hopperRef.updateChildren(hopperUpdates);
                     }
@@ -309,14 +314,8 @@ public class ScheduleFootballActivity extends AppCompatActivity {
                         if((count == num1 || count ==num2) &&
                                 footballField.getType().toLowerCase().equals(spnType.getSelectedItem().toString().toLowerCase())){
 
-                            footballField.setSuggested("sim");
-
                             //adiciona quadra sugerida
                             adpSuggested.add(footballField);
-                        }
-                        else {
-
-                            footballField.setSuggested("não");
                         }
 
                         count ++;
