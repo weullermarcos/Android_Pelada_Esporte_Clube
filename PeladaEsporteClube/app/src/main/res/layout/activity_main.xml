@@ -12,64 +12,130 @@
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
         android:orientation="horizontal">
 
         <TextView
             android:text="Usuário: "
-            android:textColor="#000000"
+            android:textColor="#689F38"
             android:textStyle="bold"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/main_txtUser"
             android:text="---"
-            android:textColor="#000000"
-            android:textSize="16dp"
+            android:textColor="#689F38"
+            android:textSize="16sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
     </LinearLayout>
 
-    <Button
-        android:layout_marginTop="50dp"
+    <LinearLayout
         android:id="@+id/main_btnScheduleFootball"
-        android:text="Marcar Futebol"
-        android:background="#689F38"
-        android:textColor="#FFFFFF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"/>
+        android:gravity="center"
+        android:layout_marginTop="30dp">
 
-    <Button
-        android:layout_marginTop="50dp"
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_football_player_attempting_to_kick_ball"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:text="Marcar Futebol"
+            android:background="#FFFFFF"
+            android:textSize="20sp"
+            android:textColor="#689F38"
+            android:textAlignment="textStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/main_btnMap"
-        android:text="Quadras de Futebol"
-        android:background="#689F38"
-        android:textColor="#FFFFFF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"/>
+        android:gravity="center"
+        android:layout_marginTop="30dp">
 
-    <Button
-        android:layout_marginTop="50dp"
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_football_court_top_view"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:text="Quadras de Futebol"
+            android:background="#FFFFFF"
+            android:textSize="20sp"
+            android:textColor="#689F38"
+            android:textAlignment="textStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/main_btnChat"
-        android:text="Chat"
-        android:background="#689F38"
-        android:textColor="#FFFFFF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"/>
+        android:gravity="center"
+        android:layout_marginTop="30dp">
 
-    <Button
-        android:layout_marginTop="50dp"
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_chat"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:text="Chat"
+            android:background="#FFFFFF"
+            android:textSize="20sp"
+            android:textColor="#689F38"
+            android:textAlignment="textStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/main_btnExit"
-        android:text="Sair"
-        android:background="#689F38"
-        android:textColor="#FFFFFF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"/>
+        android:gravity="center"
+        android:layout_marginTop="30dp">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_football_referee_with_hand_gestures"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:text="Sair"
+            android:background="#FFFFFF"
+            android:textSize="20sp"
+            android:textColor="#689F38"
+            android:textAlignment="textStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_weight="1"/>
+    </LinearLayout>
 
 </LinearLayout>

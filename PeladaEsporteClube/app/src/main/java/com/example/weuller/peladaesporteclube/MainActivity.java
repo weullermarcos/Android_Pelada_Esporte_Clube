@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference myRef;
     private Location currentLocation;
 
-    private Button btnExit, btnMap, btnChat, btnScheduleFootball;
+    private LinearLayout btnExit, btnMap, btnChat, btnScheduleFootball;
     private TextView txtUser;
 
     private DialogService dialog = new DialogService();
@@ -54,10 +55,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnExit = (Button) findViewById(R.id.main_btnExit);
-        btnMap = (Button) findViewById(R.id.main_btnMap);
-        btnChat = (Button) findViewById(R.id.main_btnChat);
-        btnScheduleFootball = (Button) findViewById(R.id.main_btnScheduleFootball);
+        btnExit = (LinearLayout) findViewById(R.id.main_btnExit);
+        btnMap = (LinearLayout) findViewById(R.id.main_btnMap);
+        btnChat = (LinearLayout) findViewById(R.id.main_btnChat);
+        btnScheduleFootball = (LinearLayout) findViewById(R.id.main_btnScheduleFootball);
         txtUser = (TextView) findViewById(R.id.main_txtUser);
 
         database = FirebaseDatabase.getInstance();

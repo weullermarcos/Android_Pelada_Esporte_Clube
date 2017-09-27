@@ -40,6 +40,9 @@
         <Button
             android:id="@+id/chat_btnSend"
             android:text="Enviar"
+            android:background="@drawable/background_gradient_shape"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>

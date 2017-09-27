@@ -2,8 +2,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
-    tools:context="com.example.weuller.peladaesporteclube.ScheduleFootballActivity">
+    android:fillViewport="true"
+    android:background="@drawable/background_gradient_shape">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,6 +17,8 @@
             android:textSize="20dp"
             android:gravity="center"
             android:text="Marcar Futebol"
+            android:textColor="#fff"
+            android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -31,6 +33,7 @@
                 android:text="Data: "
                 android:textSize="16dp"
                 android:textStyle="bold"
+                android:textColor="#fff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -39,6 +42,8 @@
                 android:textSize="14dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:backgroundTint="#fff"
                 android:layout_marginLeft="5dp"
                 android:focusableInTouchMode="false"/>
 
@@ -55,6 +60,7 @@
                 android:text="Hora: "
                 android:textSize="16dp"
                 android:textStyle="bold"
+                android:textColor="#fff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -63,6 +69,8 @@
                 android:textSize="14dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:backgroundTint="#fff"
                 android:layout_marginLeft="5dp"
                 android:focusableInTouchMode="false"/>
 
@@ -79,6 +87,7 @@
                 android:text="Tipo: "
                 android:textSize="16dp"
                 android:textStyle="bold"
+                android:textColor="#fff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -98,8 +107,9 @@
             android:layout_marginTop="20dp"
             android:id="@+id/schedule_football_btnFindSuggested"
             android:text="Buscar quadras sugeridas"
-            android:background="#689F38"
+            android:background="@drawable/background_gradient_shape"
             android:textColor="#FFFFFF"
+            android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
