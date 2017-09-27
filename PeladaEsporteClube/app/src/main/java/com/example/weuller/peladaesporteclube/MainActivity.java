@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean userExists = false;
     private boolean userCreatedOrUpdated = false;
     private String userKey = "";
+    private String userName = "";
 
 
     @Override
@@ -67,16 +68,24 @@ public class MainActivity extends AppCompatActivity {
 
         dialog.showProgressDialog("Carregando suas informações...", "Aguarde", MainActivity.this);
 
+        Bundle bundle = getIntent().getExtras();
+
+        if(bundle != null){
+
+            if(bundle.containsKey("USERNAME")){
+
+                userName = bundle.getString("USERNAME");
+                txtUser.setText(userName);
+            }
+        }
+
         if(mAuth.getCurrentUser().getDisplayName() != null) {
 
             String user = mAuth.getCurrentUser().getDisplayName();
-            //mAuth.getCurrentUser().getPhotoUrl();
-
-            if(user != null && user.isEmpty())
-                user = mAuth.getCurrentUser().getEmail();
-
-            txtUser.setText(user);
+            userName = user;
         }
+
+        txtUser.setText(userName);
 
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
@@ -192,15 +201,16 @@ public class MainActivity extends AppCompatActivity {
             Map<String, Object> hopperUpdates = new HashMap<String, Object>();
             hopperUpdates.put("latitude", currentLocation.getLatitude());
             hopperUpdates.put("longitude", currentLocation.getLongitude());
+            hopperUpdates.put("name", userName);
 
             hopperRef.updateChildren(hopperUpdates);
-
         }
         else{
 
             //registra dados do usuário
             User user = new User();
-            user.setName(mAuth.getCurrentUser().getDisplayName());
+
+            user.setName(userName);
             user.setEmail(mAuth.getCurrentUser().getEmail());
             user.setUid(mAuth.getCurrentUser().getUid());
             user.setLatitude(currentLocation.getLatitude());

@@ -156,15 +156,21 @@ public class MapFootballFieldActivity extends AppCompatActivity implements OnMap
 
                     for (User user: userList) {
 
+                        String userName = "Usuário";
+
+                        if(!user.getName().isEmpty()){
+                            userName = user.getName();
+                        }
+
                         LatLng location = new LatLng(user.getLatitude(), user.getLongitude());
 
-                        if(user.getName().equals(mAuth.getCurrentUser().getDisplayName())) {
+                        if(userName.equals(mAuth.getCurrentUser().getDisplayName())) {
                             mMap.addMarker(new MarkerOptions().position(location).title("EU"));
                             myLocation = location;
                         }
                         else {
 
-                            mMap.addMarker(new MarkerOptions().position(location).title(user.getName()));
+                            mMap.addMarker(new MarkerOptions().position(location).title(userName));
                         }
                     }
 

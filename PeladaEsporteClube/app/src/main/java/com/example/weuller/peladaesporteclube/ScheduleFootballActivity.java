@@ -162,11 +162,12 @@ public class ScheduleFootballActivity extends AppCompatActivity {
 
                 try {
 
+                    database = FirebaseDatabase.getInstance();
+                    myRef = database.getReference("footballField");
                     //Atualiza dados da quadra
                     for (FootballField footballField : footballFields) {
 
                         String userKey = footballField.getKey();
-
 
                         DatabaseReference hopperRef = myRef.child(userKey);
                         Map<String, Object> hopperUpdates = new HashMap<String, Object>();

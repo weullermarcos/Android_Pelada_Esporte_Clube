@@ -108,6 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
     private void goToMain(){
 
         Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+        intent.putExtra("USERNAME", edtName.getText().toString().trim());
         startActivity(intent);
         finish();
     }
