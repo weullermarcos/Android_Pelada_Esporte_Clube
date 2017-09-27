@@ -146,31 +146,16 @@
                     android:layout_marginBottom="20dp"
                     android:id="@+id/schedule_football_btnSchedule"
                     android:text="Marcar Futebol"
-                    android:background="#689F38"
+                    android:background="@drawable/background_gradient_shape"
                     android:textColor="#FFFFFF"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"/>
 
-                <Button
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:id="@+id/schedule_football_btnCreateAlarm"
-                    android:text="Criar Alarme"
-                    android:background="#689F38"
-                    android:textColor="#FFFFFF"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
-
             </LinearLayout>
 
         </LinearLayout>
 
-
-
     </LinearLayout>
-
-
 
 </ScrollView>

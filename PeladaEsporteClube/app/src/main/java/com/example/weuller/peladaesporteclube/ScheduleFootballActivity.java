@@ -1,8 +1,10 @@
 package com.example.weuller.peladaesporteclube;
 
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.SystemClock;
@@ -48,7 +50,7 @@ public class ScheduleFootballActivity extends AppCompatActivity {
     private String selectedDate, selectedTime;
     private Spinner spnType;
     private LinearLayout lltSuggestedArea;
-    private Button btnFindSuggested, btnSchedule, btnCreateAlarm;
+    private Button btnFindSuggested, btnSchedule;
     private ListView lstSuggested;
     private ArrayAdapter<String> adpType;
     private ArrayAdapter<FootballField> adpSuggested;
@@ -57,9 +59,9 @@ public class ScheduleFootballActivity extends AppCompatActivity {
     private DatabaseReference myRef;
     private List<FootballField> footballFields = new ArrayList<>();
     private DialogService dialog = new DialogService();
+    private AlertDialog alert;
     private boolean footballFieldUpdated = false;
     private FootballField selectedFootballFieldItem;
-
 
     public String getSelectedDate() {
         return selectedDate;
@@ -89,7 +91,6 @@ public class ScheduleFootballActivity extends AppCompatActivity {
         edtTime = (EditText) findViewById(R.id.schedule_football_edtTime);
         btnFindSuggested = (Button) findViewById(R.id.schedule_football_btnFindSuggested);
         btnSchedule = (Button) findViewById(R.id.schedule_football_btnSchedule);
-        btnCreateAlarm = (Button) findViewById(R.id.schedule_football_btnCreateAlarm);
         lstSuggested = (ListView) findViewById(R.id.schedule_football_lstSuggested);
         lltSuggestedArea = (LinearLayout) findViewById(R.id.schedule_football_lltSuggestedArea);
 
@@ -142,44 +143,6 @@ public class ScheduleFootballActivity extends AppCompatActivity {
                 dialog.showProgressDialog("Carregando informações...", "Aguarde", ScheduleFootballActivity.this);
                 loadFootballFields();
                 lltSuggestedArea.setVisibility(View.VISIBLE);
-            }
-        });
-
-        btnCreateAlarm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String date = edtDate.getText().toString();
-                String time = edtTime.getText().toString();
-
-                String[] dateParts = date.split("/");
-
-                String day = dateParts[0];
-                String month = dateParts[1];
-                String year = dateParts[2];
-
-                String[] timeParts = time.split(":");
-
-                String hour = timeParts[0];
-                String minutes = timeParts[1];
-
-
-                Calendar cal = Calendar.getInstance();
-                cal.setTimeInMillis(System.currentTimeMillis());
-                cal.clear();
-
-                //criando alarme para uma hora antes do futebol (ano, mes, dia, hora, minuto)
-                cal.set(Integer.parseInt(year),(Integer.parseInt(month) - 1),Integer.parseInt(day),(Integer.parseInt(hour) - 1),Integer.parseInt(minutes));
-              //cal.set(2017,8,27,14,8);
-
-                AlarmManager alarmMgr = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-
-                Intent intent = new Intent(ScheduleFootballActivity.this, AlarmReceiver.class);
-
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(ScheduleFootballActivity.this, 0, intent, 0);
-                // cal.add(Calendar.SECOND, 5);
-                alarmMgr.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
-
             }
         });
 
@@ -236,26 +199,7 @@ public class ScheduleFootballActivity extends AppCompatActivity {
                     hopperUpdates.put("hour", edtTime.getText().toString());
                     hopperRef.updateChildren(hopperUpdates);
 
-                    LinearLayout.LayoutParams param;
-
-                    param = new LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.MATCH_PARENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT,
-                            1.0f
-                    );
-
-                    btnSchedule.setLayoutParams(param);
-
-                    param = new LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.MATCH_PARENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT,
-                            0.0f
-                    );
-
-                    btnCreateAlarm.setLayoutParams(param);
-
-                    Toast.makeText(ScheduleFootballActivity.this, "Futebol marcado.", Toast.LENGTH_SHORT).show();
-
+                    showDialog("Atenção", "Futebol Marcado com sucesso. Deseja adicionar um alarme em seu celular?");
 
                 }catch (Exception e){
                     Toast.makeText(ScheduleFootballActivity.this, "Erro ao marcar futebol", Toast.LENGTH_SHORT).show();
@@ -280,8 +224,6 @@ public class ScheduleFootballActivity extends AppCompatActivity {
                         lstSuggested.getChildAt(i).setBackgroundColor(Color.TRANSPARENT);
                     }
                 }
-
-
             }
         });
 
@@ -371,5 +313,60 @@ public class ScheduleFootballActivity extends AppCompatActivity {
                 Toast.makeText(ScheduleFootballActivity.this, "Erro ao carregar informações de quadras. verifique a sua conexão com a internet.", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void showDialog(String title, String message){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                createAlarm();
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    public void createAlarm(){
+
+        String date = edtDate.getText().toString();
+        String time = edtTime.getText().toString();
+
+        String[] dateParts = date.split("/");
+
+        String day = dateParts[0];
+        String month = dateParts[1];
+        String year = dateParts[2];
+
+        String[] timeParts = time.split(":");
+
+        String hour = timeParts[0];
+        String minutes = timeParts[1];
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(System.currentTimeMillis());
+        cal.clear();
+
+        //criando alarme para uma hora antes do futebol (ano, mes, dia, hora, minuto)
+        cal.set(Integer.parseInt(year),(Integer.parseInt(month) - 1),Integer.parseInt(day),(Integer.parseInt(hour) - 1),Integer.parseInt(minutes));
+        //cal.set(2017,8,27,14,8);
+
+        AlarmManager alarmMgr = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+
+        Intent intent = new Intent(ScheduleFootballActivity.this, AlarmReceiver.class);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(ScheduleFootballActivity.this, 0, intent, 0);
+        // cal.add(Calendar.SECOND, 5);
+        alarmMgr.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
+
+        Toast.makeText(ScheduleFootballActivity.this, "Alarme adicionado para uma hora antes da partida", Toast.LENGTH_SHORT).show();
     }
 }
