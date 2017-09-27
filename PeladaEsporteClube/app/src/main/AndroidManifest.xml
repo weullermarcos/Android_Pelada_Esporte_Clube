@@ -39,12 +39,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".RegisterActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".LoginActivity"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -67,8 +61,13 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".MapFootballFieldActivity" />
-        <activity android:name=".ScheduleFootballActivity"></activity>
+        <activity android:name=".MainActivity" android:screenOrientation="portrait" />
+        <activity android:name=".RegisterActivity" android:screenOrientation="portrait" />
+        <activity android:name=".MapFootballFieldActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ScheduleFootballActivity" android:screenOrientation="portrait"/>
+
+        <receiver android:name=".AlarmReceiver" android:process=":remote" />
+
     </application>
 
 </manifest>

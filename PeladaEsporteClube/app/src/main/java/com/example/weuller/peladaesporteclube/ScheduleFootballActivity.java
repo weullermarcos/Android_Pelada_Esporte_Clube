@@ -1,7 +1,11 @@
 package com.example.weuller.peladaesporteclube;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,6 +36,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,7 +48,7 @@ public class ScheduleFootballActivity extends AppCompatActivity {
     private String selectedDate, selectedTime;
     private Spinner spnType;
     private LinearLayout lltSuggestedArea;
-    private Button btnFindSuggested, btnSchedule, btnSeeInTheMap;
+    private Button btnFindSuggested, btnSchedule, btnCreateAlarm;
     private ListView lstSuggested;
     private ArrayAdapter<String> adpType;
     private ArrayAdapter<FootballField> adpSuggested;
@@ -84,7 +89,7 @@ public class ScheduleFootballActivity extends AppCompatActivity {
         edtTime = (EditText) findViewById(R.id.schedule_football_edtTime);
         btnFindSuggested = (Button) findViewById(R.id.schedule_football_btnFindSuggested);
         btnSchedule = (Button) findViewById(R.id.schedule_football_btnSchedule);
-        btnSeeInTheMap = (Button) findViewById(R.id.schedule_football_btnSeeInTheMap);
+        btnCreateAlarm = (Button) findViewById(R.id.schedule_football_btnCreateAlarm);
         lstSuggested = (ListView) findViewById(R.id.schedule_football_lstSuggested);
         lltSuggestedArea = (LinearLayout) findViewById(R.id.schedule_football_lltSuggestedArea);
 
@@ -140,12 +145,41 @@ public class ScheduleFootballActivity extends AppCompatActivity {
             }
         });
 
-        btnSeeInTheMap.setOnClickListener(new View.OnClickListener() {
+        btnCreateAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(ScheduleFootballActivity.this, MapFootballFieldActivity.class);
-                startActivity(intent);
+                String date = edtDate.getText().toString();
+                String time = edtTime.getText().toString();
+
+                String[] dateParts = date.split("/");
+
+                String day = dateParts[0];
+                String month = dateParts[1];
+                String year = dateParts[2];
+
+                String[] timeParts = time.split(":");
+
+                String hour = timeParts[0];
+                String minutes = timeParts[1];
+
+
+                Calendar cal = Calendar.getInstance();
+                cal.setTimeInMillis(System.currentTimeMillis());
+                cal.clear();
+
+                //criando alarme para uma hora antes do futebol (ano, mes, dia, hora, minuto)
+                cal.set(Integer.parseInt(year),(Integer.parseInt(month) - 1),Integer.parseInt(day),(Integer.parseInt(hour) - 1),Integer.parseInt(minutes));
+              //cal.set(2017,8,27,14,8);
+
+                AlarmManager alarmMgr = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+
+                Intent intent = new Intent(ScheduleFootballActivity.this, AlarmReceiver.class);
+
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(ScheduleFootballActivity.this, 0, intent, 0);
+                // cal.add(Calendar.SECOND, 5);
+                alarmMgr.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
+
             }
         });
 
@@ -218,9 +252,9 @@ public class ScheduleFootballActivity extends AppCompatActivity {
                             0.0f
                     );
 
-                    btnSeeInTheMap.setLayoutParams(param);
+                    btnCreateAlarm.setLayoutParams(param);
 
-                    Toast.makeText(ScheduleFootballActivity.this, "Futebol marcado, entre no mapa e vote na quadra que será o futebol.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ScheduleFootballActivity.this, "Futebol marcado.", Toast.LENGTH_SHORT).show();
 
 
                 }catch (Exception e){

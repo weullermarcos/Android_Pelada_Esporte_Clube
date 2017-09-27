@@ -155,8 +155,8 @@
                 <Button
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
-                    android:id="@+id/schedule_football_btnSeeInTheMap"
-                    android:text="Ver no Mapa"
+                    android:id="@+id/schedule_football_btnCreateAlarm"
+                    android:text="Criar Alarme"
                     android:background="#689F38"
                     android:textColor="#FFFFFF"
                     android:layout_width="match_parent"
