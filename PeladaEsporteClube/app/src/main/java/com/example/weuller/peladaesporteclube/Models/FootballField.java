@@ -87,4 +87,9 @@ public class FootballField {
     public void setSuggested(String suggested) {
         this.suggested = suggested;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

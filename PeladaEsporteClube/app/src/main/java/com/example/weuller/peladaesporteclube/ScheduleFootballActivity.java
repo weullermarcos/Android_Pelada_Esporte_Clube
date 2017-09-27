@@ -1,11 +1,13 @@
 package com.example.weuller.peladaesporteclube;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,13 +46,14 @@ public class ScheduleFootballActivity extends AppCompatActivity {
     private Button btnFindSuggested, btnSchedule, btnSeeInTheMap;
     private ListView lstSuggested;
     private ArrayAdapter<String> adpType;
-    private ArrayAdapter<String> adpSuggested;
+    private ArrayAdapter<FootballField> adpSuggested;
     private FirebaseAuth mAuth;
     private FirebaseDatabase database;
     private DatabaseReference myRef;
     private List<FootballField> footballFields = new ArrayList<>();
     private DialogService dialog = new DialogService();
     private boolean footballFieldUpdated = false;
+    private FootballField selectedFootballFieldItem;
 
 
     public String getSelectedDate() {
@@ -94,7 +97,7 @@ public class ScheduleFootballActivity extends AppCompatActivity {
         spnType.setAdapter(adpType);
 
         //configurando adapter de quadras sugeridas
-        adpSuggested = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+        adpSuggested = new ArrayAdapter<FootballField>(this, android.R.layout.simple_list_item_1);
         lstSuggested.setAdapter(adpSuggested);
 
         populaAdapter();
@@ -152,6 +155,12 @@ public class ScheduleFootballActivity extends AppCompatActivity {
 
                 footballFieldUpdated = true;
 
+                if(selectedFootballFieldItem == null){
+
+                    Toast.makeText(ScheduleFootballActivity.this, "Favor selecionar uma das quadras sugeridas.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 dialog.showProgressDialog("Marcando Futebol.", "Aguarde", ScheduleFootballActivity.this);
 
                 try {
@@ -181,10 +190,10 @@ public class ScheduleFootballActivity extends AppCompatActivity {
                     Map<String, Object> hopperUpdates = new HashMap<String, Object>();
 
                     hopperUpdates.put("date", edtDate.getText().toString());
-                    hopperUpdates.put("footballFieldId", "XXXXXXXXXXXX");
-                    hopperUpdates.put("footballFieldLatitude", 0.0);
-                    hopperUpdates.put("footballFieldLongitude", 0.0);
-                    hopperUpdates.put("footballFieldName", "YYYYY");
+                    hopperUpdates.put("footballFieldId", selectedFootballFieldItem.getKey());
+                    hopperUpdates.put("footballFieldLatitude", selectedFootballFieldItem.getLatitude());
+                    hopperUpdates.put("footballFieldLongitude", selectedFootballFieldItem.getLongitude());
+                    hopperUpdates.put("footballFieldName", selectedFootballFieldItem.getName());
                     hopperUpdates.put("hour", edtTime.getText().toString());
                     hopperRef.updateChildren(hopperUpdates);
 
@@ -215,6 +224,25 @@ public class ScheduleFootballActivity extends AppCompatActivity {
                 finally {
                     dialog.hideProgressDialog();
                 }
+            }
+        });
+
+        lstSuggested.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+
+                selectedFootballFieldItem = (FootballField) lstSuggested.getItemAtPosition(position);
+
+                //muda cor de fundo da linha selecionada
+                for (int i = 0; i < lstSuggested.getChildCount(); i++) {
+                    if(position == i ){
+                        lstSuggested.getChildAt(i).setBackgroundColor(Color.parseColor("#689F38"));
+                    }else{
+                        lstSuggested.getChildAt(i).setBackgroundColor(Color.TRANSPARENT);
+                    }
+                }
+
+
             }
         });
 
@@ -284,7 +312,7 @@ public class ScheduleFootballActivity extends AppCompatActivity {
                             footballField.setSuggested("sim");
 
                             //adiciona quadra sugerida
-                            adpSuggested.add(footballField.getName());
+                            adpSuggested.add(footballField);
                         }
                         else {
 

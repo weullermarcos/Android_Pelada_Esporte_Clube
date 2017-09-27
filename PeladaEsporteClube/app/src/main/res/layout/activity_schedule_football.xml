@@ -113,7 +113,7 @@
             android:weightSum="1">
 
             <TextView
-                android:text="Quadras sugeridas para votação: "
+                android:text="Quadras sugeridas: "
                 android:layout_marginBottom="20dp"
                 android:textSize="16dp"
                 android:textStyle="bold"
