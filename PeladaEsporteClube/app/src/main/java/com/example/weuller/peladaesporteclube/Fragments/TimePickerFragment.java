@@ -1,4 +1,4 @@
-package com.example.weuller.peladaesporteclube;
+package com.example.weuller.peladaesporteclube.Fragments;
 
 
 import android.app.Dialog;
@@ -10,6 +10,8 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.text.format.DateFormat;
 import android.widget.TimePicker;
+
+import com.example.weuller.peladaesporteclube.Activities.ScheduleFootballActivity;
 
 
 /**

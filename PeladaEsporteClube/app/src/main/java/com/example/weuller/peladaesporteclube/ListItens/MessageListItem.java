@@ -1,7 +1,9 @@
-package com.example.weuller.peladaesporteclube;
+package com.example.weuller.peladaesporteclube.ListItens;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.weuller.peladaesporteclube.R;
 
 public class MessageListItem extends AppCompatActivity {
 

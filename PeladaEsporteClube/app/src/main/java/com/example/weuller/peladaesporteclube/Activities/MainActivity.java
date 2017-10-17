@@ -1,20 +1,19 @@
-package com.example.weuller.peladaesporteclube;
+package com.example.weuller.peladaesporteclube.Activities;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.weuller.peladaesporteclube.Models.User;
+import com.example.weuller.peladaesporteclube.R;
 import com.example.weuller.peladaesporteclube.Services.DialogService;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;

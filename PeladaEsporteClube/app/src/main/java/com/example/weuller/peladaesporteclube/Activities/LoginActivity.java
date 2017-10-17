@@ -1,4 +1,4 @@
-package com.example.weuller.peladaesporteclube;
+package com.example.weuller.peladaesporteclube.Activities;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -13,13 +13,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.weuller.peladaesporteclube.R;
 import com.example.weuller.peladaesporteclube.Services.DialogService;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
 
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;

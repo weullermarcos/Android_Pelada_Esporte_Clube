@@ -1,4 +1,4 @@
-package com.example.weuller.peladaesporteclube;
+package com.example.weuller.peladaesporteclube.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.*;
@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.weuller.peladaesporteclube.Adapters.ChatMessageRecyclerViewAdapter;
 import com.example.weuller.peladaesporteclube.Models.ChatMessage;
+import com.example.weuller.peladaesporteclube.R;
 import com.example.weuller.peladaesporteclube.Services.DialogService;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;

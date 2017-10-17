@@ -1,4 +1,4 @@
-package com.example.weuller.peladaesporteclube;
+package com.example.weuller.peladaesporteclube.Fragments;
 
 
 import android.app.DatePickerDialog;
@@ -7,10 +7,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.DatePicker;
+
+import com.example.weuller.peladaesporteclube.Activities.ScheduleFootballActivity;
 
 import java.util.Calendar;
 

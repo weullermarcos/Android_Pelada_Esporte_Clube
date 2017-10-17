@@ -1,4 +1,4 @@
-package com.example.weuller.peladaesporteclube;
+package com.example.weuller.peladaesporteclube.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,9 +6,11 @@ import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.weuller.peladaesporteclube.Fragments.BottomMapFragment;
 import com.example.weuller.peladaesporteclube.Models.FootballField;
 import com.example.weuller.peladaesporteclube.Models.FootballMatch;
 import com.example.weuller.peladaesporteclube.Models.User;
+import com.example.weuller.peladaesporteclube.R;
 import com.example.weuller.peladaesporteclube.Services.DialogService;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -27,7 +29,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class MapFootballFieldActivity extends AppCompatActivity implements OnMapReadyCallback {
 

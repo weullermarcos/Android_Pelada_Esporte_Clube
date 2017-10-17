@@ -1,4 +1,4 @@
-package com.example.weuller.peladaesporteclube;
+package com.example.weuller.peladaesporteclube.Fragments;
 
 
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.weuller.peladaesporteclube.Models.FootballField;
+import com.example.weuller.peladaesporteclube.R;
 
 
 /**

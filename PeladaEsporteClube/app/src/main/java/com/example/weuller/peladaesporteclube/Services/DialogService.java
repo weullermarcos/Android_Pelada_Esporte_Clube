@@ -6,8 +6,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 
-import com.example.weuller.peladaesporteclube.MainActivity;
-
 /**
  * Created by weullermarcos on 08/09/17.
  */

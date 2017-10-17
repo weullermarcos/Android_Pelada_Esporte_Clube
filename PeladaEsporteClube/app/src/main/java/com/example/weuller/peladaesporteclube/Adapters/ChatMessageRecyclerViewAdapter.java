@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.weuller.peladaesporteclube.ChatMessageViewHolder;
+import com.example.weuller.peladaesporteclube.ViewHolders.ChatMessageViewHolder;
 import com.example.weuller.peladaesporteclube.Models.ChatMessage;
 import com.example.weuller.peladaesporteclube.R;
 

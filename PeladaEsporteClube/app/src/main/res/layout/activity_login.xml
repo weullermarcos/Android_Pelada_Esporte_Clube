@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:padding="10dp"
               android:background="@drawable/background_gradient_shape"
-    tools:context="com.example.weuller.peladaesporteclube.LoginActivity">
+    tools:context="com.example.weuller.peladaesporteclube.Activities.LoginActivity">
 
     <ImageView
         android:layout_marginTop="20dp"

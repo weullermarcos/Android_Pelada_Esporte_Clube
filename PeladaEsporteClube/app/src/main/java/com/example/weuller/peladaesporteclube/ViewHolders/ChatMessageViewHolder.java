@@ -1,4 +1,4 @@
-package com.example.weuller.peladaesporteclube;
+package com.example.weuller.peladaesporteclube.ViewHolders;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.weuller.peladaesporteclube.Models.ChatMessage;
+import com.example.weuller.peladaesporteclube.R;
 
 /**
  * Created by weullermarcos on 09/09/17.

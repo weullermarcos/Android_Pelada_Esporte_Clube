@@ -1,4 +1,4 @@
-package com.example.weuller.peladaesporteclube;
+package com.example.weuller.peladaesporteclube.Activities;
 
 import android.app.AlarmManager;
 import android.app.AlertDialog;
@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,13 +21,12 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.weuller.peladaesporteclube.Receivers.AlarmReceiver;
+import com.example.weuller.peladaesporteclube.Fragments.DatePickerFragment;
+import com.example.weuller.peladaesporteclube.Fragments.TimePickerFragment;
 import com.example.weuller.peladaesporteclube.Models.FootballField;
-import com.example.weuller.peladaesporteclube.Models.FootballMatch;
+import com.example.weuller.peladaesporteclube.R;
 import com.example.weuller.peladaesporteclube.Services.DialogService;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,7 +36,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

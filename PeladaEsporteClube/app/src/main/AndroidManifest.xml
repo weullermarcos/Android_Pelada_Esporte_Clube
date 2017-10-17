@@ -39,7 +39,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".Activities.LoginActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -47,8 +47,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ChatActivity" />
-        <activity android:name=".MessageListItem" />
+        <activity android:name=".Activities.ChatActivity" />
+        <activity android:name=".ListItens.MessageListItem" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -61,12 +61,12 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".MainActivity" android:screenOrientation="portrait" />
-        <activity android:name=".RegisterActivity" android:screenOrientation="portrait" />
-        <activity android:name=".MapFootballFieldActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".ScheduleFootballActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.MainActivity" android:screenOrientation="portrait" />
+        <activity android:name=".Activities.RegisterActivity" android:screenOrientation="portrait" />
+        <activity android:name=".Activities.MapFootballFieldActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.ScheduleFootballActivity" android:screenOrientation="portrait"/>
 
-        <receiver android:name=".AlarmReceiver" android:process=":remote" />
+        <receiver android:name=".Receivers.AlarmReceiver" android:process=":remote" />
 
     </application>
 

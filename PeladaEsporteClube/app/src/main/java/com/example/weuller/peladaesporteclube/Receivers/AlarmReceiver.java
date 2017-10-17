@@ -1,4 +1,4 @@
-package com.example.weuller.peladaesporteclube;
+package com.example.weuller.peladaesporteclube.Receivers;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
